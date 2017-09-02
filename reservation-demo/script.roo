@@ -1,4 +1,4 @@
-project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --packaging WAR 
+project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --java 8 --multimodule STANDARD
 
 jpa setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT
 
