@@ -3,38 +3,38 @@ project setup --topLevelPackage com.rindus.reservationDemo --projectName Reserva
 jpa setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT
 
 entity jpa --class ~.domain.Product
-field string --fieldName name --notNull --unique --sizeMax 250
-field string --fieldName description --notNull --sizeMax 4000
+field string --class ~.domain.Product --fieldName name --notNull --unique --sizeMax 250
+field string --class ~.domain.Product --fieldName description --notNull --sizeMax 4000
 
-entity jpa --class ~.domain.Cliente
-field string --fieldName email --notNull --unique 
-field string --fieldName name --notNull --sizeMax 250
-field string --fieldName surname1 --notNull --sizeMax 250
-field string --fieldName surname2 --sizeMax 250
-field date --fieldName birthDate --type java.util.Date --notNull --past --dateTimeFormatPattern dd/MM/yyyy
+entity jpa --class ~.domain.Customer
+field string --class ~.domain.Customer --fieldName email --notNull --unique 
+field string --class ~.domain.Customer --fieldName name --notNull --sizeMax 250
+field string --class ~.domain.Customer --fieldName surname1 --notNull --sizeMax 250
+field string --class ~.domain.Customer --fieldName surname2 --sizeMax 250
+field date --class ~.domain.Customer --fieldName birthDate --type java.util.Date --notNull --past --dateTimeFormatPattern dd/MM/yyyy
 
 entity jpa --class ~.domain.Stock
-field reference --fieldName producto --type ~.domain.Product --notNull
-field date --fieldName dateIn --type java.util.Date --dateTimeFormatPattern dd/MM/yyyy --notNull 
-field date --fieldName dateOut --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
+field reference --class ~.domain.Stock --fieldName producto --type ~.domain.Product --notNull
+field date --class ~.domain.Stock --fieldName dateIn --type java.util.Date --dateTimeFormatPattern dd/MM/yyyy --notNull 
+field date --class ~.domain.Stock --fieldName dateOut --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
 
 entity jpa --class ~.domain.PricePerProduct
-field reference --fieldName product --type ~.domain.Product --notNull 
-field number --fieldName price --type java.lang.Long --notNull --min 0
-field date --fieldName startPrice --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss" --notNull
-field date --fieldName endPrice --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
+field reference --class ~.domain.PricePerProduct --fieldName product --type ~.domain.Product --notNull 
+field number --class ~.domain.PricePerProduct --fieldName price --type java.lang.Long --notNull --min 0
+field date --class ~.domain.PricePerProduct --fieldName startPrice --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss" --notNull
+field date --class ~.domain.PricePerProduct --fieldName endPrice --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
 
 entity jpa --class ~.domain.CustomerOrder
-field reference --fieldName customer --type ~.domain.Cliente --notNull 
-field date --fieldName orderDate --type java.util.Date --notNull --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
+field reference --class ~.domain.CustomerOrder --fieldName customer --type ~.domain.Customer --notNull 
+field date --class ~.domain.CustomerOrder --fieldName orderDate --type java.util.Date --notNull --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
 
 entity jpa --class ~.domain.Reservation
-field reference --fieldName stockItem --type ~.domain.Stock --notNull 
-field reference --fieldName customer --type ~.domain.Cliente 
-field date --fieldName startReservation --type java.util.Date --notNull --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
-field date --fieldName expirationReservation --type java.util.Date --notNull 
+field reference --class ~.domain.Reservation --fieldName stockItem --type ~.domain.Stock --notNull 
+field reference --class ~.domain.Reservation --fieldName customer --type ~.domain.Customer 
+field date --class ~.domain.Reservation --fieldName startReservation --type java.util.Date --notNull --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
+field date --class ~.domain.Reservation --fieldName expirationReservation --type java.util.Date --notNull 
 
 entity jpa --class ~.domain.Sell
-field reference --fieldName stockItem --type ~.domain.Stock --notNull 
-field reference --fieldName priceSell --type ~.domain.PricePerProduct --notNull 
-field reference --fieldName customerOrder --type ~.domain.CustomerOrder --notNull 
+field reference --class ~.domain.Sell --fieldName stockItem --type ~.domain.Stock --notNull 
+field reference --class ~.domain.Sell --fieldName priceSell --type ~.domain.PricePerProduct --notNull 
+field reference --class ~.domain.Sell --fieldName customerOrder --type ~.domain.CustomerOrder --notNull 
