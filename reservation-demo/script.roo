@@ -2,7 +2,9 @@
 //project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --java 8 --multimodule BASIC
 project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --java 8
 
-jpa setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT
+//jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY
+jpa setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT 
+property add --key spring.jpa.properties.hibernate.hbm2ddl.auto --value update
 
 entity jpa --class ~.domain.Product
 entity jpa --class ~.domain.Customer
@@ -56,3 +58,11 @@ field reference --fieldName priceSell --type ~.domain.PricePerProduct --notNull
 //field reference --fieldName customerOrder --type ~.domain.CustomerOrder --notNull 
 
 repository jpa --all
+service --all
+
+//test unit
+//test integration
+
+web mvc setup
+web mvc controller --all
+//web mvc finder --all
