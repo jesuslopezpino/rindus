@@ -1,0 +1,18 @@
+<!--TABLE-->
+<div class="table-responsive" id="containerFields" data-th-fragment="pedidos-detailModalConfirmBody" data-th-with="collectionLink=${@linkBuilder.of('CustomersItemPedidosThymeleafController')}">
+    <table id="pedidos-detail-table-items-to-remove-batch" data-parent-table="customer-entity-table" data-data-parent-id="${customer != null ? customer.id : ''}" data-data-load-url="${collectionLink.to('datatablesByIdsIn').with('customer', '_PARENTID_')}">
+      <thead>
+        <tr>
+              <th data-data="customer" data-th-text="#{label_customer_pedidos_customer}">customer</th>
+              <th data-data="orderDate" data-th-text="#{label_customer_pedidos_orderdate}">orderDate</th>
+        </tr>
+      </thead>
+      <tbody data-th-remove="all">
+        <tr>
+              <td>customer</td>
+              <td>orderDate</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<!-- /TABLE -->

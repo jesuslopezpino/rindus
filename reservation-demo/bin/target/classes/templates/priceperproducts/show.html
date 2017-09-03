@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-layout-decorate="~{layouts/default-list-layout}">
+  <head id="head">
+
+    <title data-th-text="|#{label_show_entity(#{label_priceperproduct})}|">Show PricePerProduct - Spring Roo application</title>
+
+  </head>
+
+  <body id="body">
+
+    <header role="banner">
+      <!-- Content replaced by layout of the page displayed -->
+    </header>
+
+    <!--CONTAINER-->
+    <div class="container bg-container">
+      <!-- CONTENT -->
+      <!--
+        Only the inner content of the following tag "section" is included
+        within the template, in the section "content"
+      -->
+      <section data-layout-fragment="content" data-th-object="${pricePerProduct}">
+        <div class="container-fluid content">
+
+          <!-- CONTENT -->
+          <h1 data-th-text="#{label_show_entity(#{label_priceperproduct})}">Show PricePerProduct</h1>
+
+            <div id="mainEntityFieldSet">
+              <h2 data-th-text="#{label_data_entity(#{label_priceperproduct})}">PricePerProduct data</h2>
+              <ul class="list-unstyled" id="containerFields">
+                  <li id="priceperproduct-producto-field" data-z="750e7ed0">
+            	      <strong data-th-text="#{label_priceperproduct_producto}">producto</strong>
+                    <span data-th-text="*{{producto}}">productoValue</span>
+         	        </li>
+                  <li id="priceperproduct-price-field" data-z="c948b66e">
+            	      <strong data-th-text="#{label_priceperproduct_price}">price</strong>
+                    <span data-th-text="*{{price}}">priceValue</span>
+         	        </li>
+                  <li id="priceperproduct-startprice-field" data-z="2cc54190">
+            	      <strong data-th-text="#{label_priceperproduct_startprice}">startPrice</strong>
+                    <span data-th-text="*{{startPrice}}">startPriceValue</span>
+         	        </li>
+                  <li id="priceperproduct-endprice-field" data-z="d751d0f0">
+            	      <strong data-th-text="#{label_priceperproduct_endprice}">endPrice</strong>
+                    <span data-th-text="*{{endPrice}}">endPriceValue</span>
+         	        </li>
+                  <li id="priceperproduct-sell-field" data-z="d13d6910">
+            	      <strong data-th-text="#{label_priceperproduct_sell}">sell</strong>
+                    <span data-th-text="*{{sell}}">sellValue</span>
+         	        </li>
+              </ul>
+            </div>
+
+
+          <div class="clearfix">
+            <div class="pull-right">
+             <a id="PricePerProduct_edit" href="edit.html" class="btn btn-primary" data-th-title="#{label_goEdit}" data-th-href="${@linkBuilder.of('PricePerProductsItemThymeleafController').to('editForm').with('pricePerProduct', pricePerProduct.id)}" data-th-text="#{label_edit}">Edit</a>
+            </div>
+          </div>
+
+
+          <div class="clearfix">
+            <div class="pull-left">
+              <a id="PricePerProduct_list" href="list.html" class="btn btn-default" data-th-title="#{label_goBack}" data-th-href="${@linkBuilder.of('PricePerProductsCollectionThymeleafController').to('list')}">
+  	             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+  	             <span data-th-text="#{label_back}">Back</span>
+  	          </a>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      <!-- /CONTENT -->
+  </div>
+  <!-- /CONTAINER -->
+
+  <footer class="container">
+    <!-- Content replaced by layout of the page displayed -->
+  </footer>
+
+  <!-- JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so that the pages load faster -->
+  <!-- JavaScript loaded by layout of the page displayed -->
+  <!--
+       Only the inner content of the following tag "javascript" is included
+       within the template, in the div "javascript"
+      -->
+  <div data-layout-fragment="javascript">
+  </div>
+
+  </body>
+
+</html>
