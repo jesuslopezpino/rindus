@@ -64,6 +64,17 @@ service --all
 //test integration
 
 web mvc setup
+//web mvc controller --entity ~.domain.Product --responseType JSON
+//web mvc controller --entity ~.domain.Customer --responseType JSON
+//web mvc controller --entity ~.domain.Stock --responseType JSON
+//web mvc controller --entity ~.domain.PricePerProduct --responseType JSON
+//web mvc controller --entity ~.domain.CustomerOrder --responseType JSON
+//web mvc controller --entity ~.domain.Reservation --responseType JSON
+//web mvc controller --entity ~.domain.Sell --responseType JSON
+
+web mvc language --code en
 web mvc controller --all
-web mvc finder --all
 web mvc view setup --type THYMELEAF
+web mvc controller --all --responseType THYMELEAF
+web mvc finder --all --responseType THYMELEAF
+web mvc detail --all --responseType THYMELEAF
