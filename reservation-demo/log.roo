@@ -1,4 +1,4 @@
-// Spring Roo 2.0.0.RC2 [rev 76d128f] log opened at 2017-09-03 20:00:52
+// Spring Roo 2.0.0.RC2 [rev 76d128f] log opened at 2017-09-03 21:53:59
 project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --java 8
 jpa setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT 
 property add --key spring.jpa.properties.hibernate.hbm2ddl.auto --value update
@@ -26,6 +26,8 @@ focus --class ~.domain.Stock
 field date --fieldName dateIn --type java.util.Date --dateTimeFormatPattern dd/MM/yyyy --notNull 
 field date --fieldName dateOut --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
 field list --fieldName reservas --type ~.domain.Reservation --cardinality ONE_TO_MANY --mappedBy stockItem
+field list --fieldName ventas --type ~.domain.Sell --cardinality ONE_TO_MANY --mappedBy stockItem
+field list --fieldName preciosVenta --type ~.domain.PricePerProduct --cardinality ONE_TO_MANY --mappedBy stockItem
 focus --class ~.domain.PricePerProduct
 field number --fieldName price --type java.lang.Long --notNull --min 0
 field date --fieldName startPrice --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss" --notNull
@@ -36,9 +38,6 @@ field list --fieldName sellList --type ~.domain.Sell --cardinality ONE_TO_MANY -
 focus --class ~.domain.Reservation
 field date --fieldName startReservation --type java.util.Date --notNull --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
 field date --fieldName expirationReservation --type java.util.Date --notNull 
-focus --class ~.domain.Sell
-field reference --fieldName stockItem --type ~.domain.Stock --notNull 
-field reference --fieldName priceSell --type ~.domain.PricePerProduct --notNull 
 repository jpa --all
 service --all
 web mvc setup

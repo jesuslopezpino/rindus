@@ -30,9 +30,9 @@ public class QPricePerProduct extends EntityPathBase<PricePerProduct> {
 
     public final QProduct producto;
 
-    public final QSell sell;
-
     public final DateTimePath<java.util.Date> startPrice = createDateTime("startPrice", java.util.Date.class);
+
+    public final QStock stockItem;
 
     public final NumberPath<Integer> version = createNumber("version", Integer.class);
 
@@ -55,7 +55,7 @@ public class QPricePerProduct extends EntityPathBase<PricePerProduct> {
     public QPricePerProduct(Class<? extends PricePerProduct> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.producto = inits.isInitialized("producto") ? new QProduct(forProperty("producto")) : null;
-        this.sell = inits.isInitialized("sell") ? new QSell(forProperty("sell"), inits.get("sell")) : null;
+        this.stockItem = inits.isInitialized("stockItem") ? new QStock(forProperty("stockItem"), inits.get("stockItem")) : null;
     }
 
 }

@@ -34,6 +34,8 @@ focus --class ~.domain.Stock
 field date --fieldName dateIn --type java.util.Date --dateTimeFormatPattern dd/MM/yyyy --notNull 
 field date --fieldName dateOut --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
 field list --fieldName reservas --type ~.domain.Reservation --cardinality ONE_TO_MANY --mappedBy stockItem
+field list --fieldName ventas --type ~.domain.Sell --cardinality ONE_TO_MANY --mappedBy stockItem
+field list --fieldName preciosVenta --type ~.domain.PricePerProduct --cardinality ONE_TO_MANY --mappedBy stockItem
 
 focus --class ~.domain.PricePerProduct
 //field reference --fieldName product --type ~.domain.Product --notNull
@@ -52,9 +54,9 @@ focus --class ~.domain.Reservation
 field date --fieldName startReservation --type java.util.Date --notNull --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
 field date --fieldName expirationReservation --type java.util.Date --notNull 
 
-focus --class ~.domain.Sell
-field reference --fieldName stockItem --type ~.domain.Stock --notNull 
-field reference --fieldName priceSell --type ~.domain.PricePerProduct --notNull 
+//focus --class ~.domain.Sell
+//field reference --fieldName stockItem --type ~.domain.Stock --notNull --cardinality MANY_TO_ONE
+//field reference --fieldName priceSell --type ~.domain.PricePerProduct --notNull --cardinality MANY_TO_ONE
 //field reference --fieldName customerOrder --type ~.domain.CustomerOrder --notNull 
 
 repository jpa --all

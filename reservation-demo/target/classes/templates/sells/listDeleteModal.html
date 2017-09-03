@@ -3,16 +3,14 @@
     <table id="sell-entity-table-item-to-remove" data-data-load-url="${collectionLink.to('datatablesByIdsIn')}">
       <thead>
         <tr>
-          <th data-data="customerOrder" data-th-text="#{label_sell_customerorder}">customerOrder</th>
           <th data-data="stockItem" data-th-text="#{label_sell_stockitem}">stockItem</th>
-          <th data-data="priceSell" data-th-text="#{label_sell_pricesell}">priceSell</th>
+          <th data-data="customerOrder" data-th-text="#{label_sell_customerorder}">customerOrder</th>
         </tr>
       </thead>
       <tbody data-th-remove="all">
         <tr>
-          <td>customerOrder</td>
           <td>stockItem</td>
-          <td>priceSell</td>
+          <td>customerOrder</td>
         </tr>
       </tbody>
     </table>

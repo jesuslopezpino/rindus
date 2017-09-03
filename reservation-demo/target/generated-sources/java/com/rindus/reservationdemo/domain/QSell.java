@@ -26,8 +26,6 @@ public class QSell extends EntityPathBase<Sell> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final QPricePerProduct priceSell;
-
     public final QStock stockItem;
 
     public final NumberPath<Integer> version = createNumber("version", Integer.class);
@@ -51,7 +49,6 @@ public class QSell extends EntityPathBase<Sell> {
     public QSell(Class<? extends Sell> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.customerOrder = inits.isInitialized("customerOrder") ? new QCustomerOrder(forProperty("customerOrder"), inits.get("customerOrder")) : null;
-        this.priceSell = inits.isInitialized("priceSell") ? new QPricePerProduct(forProperty("priceSell"), inits.get("priceSell")) : null;
         this.stockItem = inits.isInitialized("stockItem") ? new QStock(forProperty("stockItem"), inits.get("stockItem")) : null;
     }
 

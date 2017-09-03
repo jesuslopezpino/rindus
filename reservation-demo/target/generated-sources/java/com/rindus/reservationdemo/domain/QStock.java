@@ -28,11 +28,13 @@ public class QStock extends EntityPathBase<Stock> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final ListPath<PricePerProduct, QPricePerProduct> preciosVenta = this.<PricePerProduct, QPricePerProduct>createList("preciosVenta", PricePerProduct.class, QPricePerProduct.class, PathInits.DIRECT2);
+
     public final QProduct producto;
 
     public final ListPath<Reservation, QReservation> reservas = this.<Reservation, QReservation>createList("reservas", Reservation.class, QReservation.class, PathInits.DIRECT2);
 
-    public final QSell sell;
+    public final ListPath<Sell, QSell> ventas = this.<Sell, QSell>createList("ventas", Sell.class, QSell.class, PathInits.DIRECT2);
 
     public final NumberPath<Integer> version = createNumber("version", Integer.class);
 
@@ -55,7 +57,6 @@ public class QStock extends EntityPathBase<Stock> {
     public QStock(Class<? extends Stock> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.producto = inits.isInitialized("producto") ? new QProduct(forProperty("producto")) : null;
-        this.sell = inits.isInitialized("sell") ? new QSell(forProperty("sell"), inits.get("sell")) : null;
     }
 
 }

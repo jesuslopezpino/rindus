@@ -1,0 +1,18 @@
+<!--TABLE-->
+<div class="table-responsive" id="containerFields" data-th-fragment="ventas-detailModalConfirmBody" data-th-with="collectionLink=${@linkBuilder.of('StocksItemVentasThymeleafController')}">
+    <table id="ventas-detail-table-items-to-remove-batch" data-parent-table="stock-entity-table" data-data-parent-id="${stock != null ? stock.id : ''}" data-data-load-url="${collectionLink.to('datatablesByIdsIn').with('stock', '_PARENTID_')}">
+      <thead>
+        <tr>
+              <th data-data="stockItem" data-th-text="#{label_stock_ventas_stockitem}">stockItem</th>
+              <th data-data="customerOrder" data-th-text="#{label_stock_ventas_customerorder}">customerOrder</th>
+        </tr>
+      </thead>
+      <tbody data-th-remove="all">
+        <tr>
+              <td>stockItem</td>
+              <td>customerOrder</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<!-- /TABLE -->
