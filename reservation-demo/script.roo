@@ -21,6 +21,7 @@ field string --fieldName name --notNull --sizeMax 250
 field string --fieldName surname1 --notNull --sizeMax 250
 field string --fieldName surname2 --sizeMax 250
 field date --fieldName birthDate --type java.util.Date --notNull --past --dateTimeFormatPattern dd/MM/yyyy
+field list --fieldName pedidos --type ~.domain.CustomerOrder --cardinality ONE_TO_MANY --mappedBy customer
 
 focus --class ~.domain.Stock
 field reference --fieldName producto --type ~.domain.Product --notNull
@@ -34,7 +35,7 @@ field date --fieldName startPrice --type java.util.Date --dateTimeFormatPattern 
 field date --fieldName endPrice --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
 
 focus --class ~.domain.CustomerOrder
-field reference --fieldName customer --type ~.domain.Customer --notNull 
+//field reference --fieldName customer --type ~.domain.Customer --notNull 
 field date --fieldName orderDate --type java.util.Date --notNull --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
 
 focus --class ~.domain.Reservation
