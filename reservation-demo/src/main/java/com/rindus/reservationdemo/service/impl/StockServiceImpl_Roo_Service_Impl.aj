@@ -3,12 +3,15 @@
 
 package com.rindus.reservationdemo.service.impl;
 
+import com.rindus.reservationdemo.domain.PricePerProduct;
 import com.rindus.reservationdemo.domain.Product;
 import com.rindus.reservationdemo.domain.Reservation;
 import com.rindus.reservationdemo.domain.Sell;
 import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.repository.StockRepository;
+import com.rindus.reservationdemo.service.api.PricePerProductService;
 import com.rindus.reservationdemo.service.api.ReservationService;
+import com.rindus.reservationdemo.service.api.SellService;
 import com.rindus.reservationdemo.service.impl.StockServiceImpl;
 import io.springlets.data.domain.GlobalSearch;
 import java.util.HashSet;
@@ -38,18 +41,34 @@ privileged aspect StockServiceImpl_Roo_Service_Impl {
      * TODO Auto-generated attribute documentation
      * 
      */
+    private PricePerProductService StockServiceImpl.pricePerProductService;
+    
+    /**
+     * TODO Auto-generated attribute documentation
+     * 
+     */
     private ReservationService StockServiceImpl.reservationService;
+    
+    /**
+     * TODO Auto-generated attribute documentation
+     * 
+     */
+    private SellService StockServiceImpl.sellService;
     
     /**
      * TODO Auto-generated constructor documentation
      * 
      * @param stockRepository
+     * @param pricePerProductService
      * @param reservationService
+     * @param sellService
      */
     @Autowired
-    public StockServiceImpl.new(StockRepository stockRepository, @Lazy ReservationService reservationService) {
+    public StockServiceImpl.new(StockRepository stockRepository, @Lazy PricePerProductService pricePerProductService, @Lazy ReservationService reservationService, @Lazy SellService sellService) {
         setStockRepository(stockRepository);
+        setPricePerProductService(pricePerProductService);
         setReservationService(reservationService);
+        setSellService(sellService);
     }
 
     /**
@@ -73,6 +92,24 @@ privileged aspect StockServiceImpl_Roo_Service_Impl {
     /**
      * TODO Auto-generated method documentation
      * 
+     * @return PricePerProductService
+     */
+    public PricePerProductService StockServiceImpl.getPricePerProductService() {
+        return pricePerProductService;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param pricePerProductService
+     */
+    public void StockServiceImpl.setPricePerProductService(PricePerProductService pricePerProductService) {
+        this.pricePerProductService = pricePerProductService;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
      * @return ReservationService
      */
     public ReservationService StockServiceImpl.getReservationService() {
@@ -86,6 +123,38 @@ privileged aspect StockServiceImpl_Roo_Service_Impl {
      */
     public void StockServiceImpl.setReservationService(ReservationService reservationService) {
         this.reservationService = reservationService;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @return SellService
+     */
+    public SellService StockServiceImpl.getSellService() {
+        return sellService;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param sellService
+     */
+    public void StockServiceImpl.setSellService(SellService sellService) {
+        this.sellService = sellService;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stock
+     * @param preciosVentaToAdd
+     * @return Stock
+     */
+    @Transactional
+    public Stock StockServiceImpl.addToPreciosVenta(Stock stock, Iterable<Long> preciosVentaToAdd) {
+        List<PricePerProduct> preciosVenta = getPricePerProductService().findAll(preciosVentaToAdd);
+        stock.addToPreciosVenta(preciosVenta);
+        return getStockRepository().save(stock);
     }
     
     /**
@@ -106,6 +175,34 @@ privileged aspect StockServiceImpl_Roo_Service_Impl {
      * TODO Auto-generated method documentation
      * 
      * @param stock
+     * @param ventasToAdd
+     * @return Stock
+     */
+    @Transactional
+    public Stock StockServiceImpl.addToVentas(Stock stock, Iterable<Long> ventasToAdd) {
+        List<Sell> ventas = getSellService().findAll(ventasToAdd);
+        stock.addToVentas(ventas);
+        return getStockRepository().save(stock);
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stock
+     * @param preciosVentaToRemove
+     * @return Stock
+     */
+    @Transactional
+    public Stock StockServiceImpl.removeFromPreciosVenta(Stock stock, Iterable<Long> preciosVentaToRemove) {
+        List<PricePerProduct> preciosVenta = getPricePerProductService().findAll(preciosVentaToRemove);
+        stock.removeFromPreciosVenta(preciosVenta);
+        return getStockRepository().save(stock);
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stock
      * @param reservasToRemove
      * @return Stock
      */
@@ -113,6 +210,48 @@ privileged aspect StockServiceImpl_Roo_Service_Impl {
     public Stock StockServiceImpl.removeFromReservas(Stock stock, Iterable<Long> reservasToRemove) {
         List<Reservation> reservas = getReservationService().findAll(reservasToRemove);
         stock.removeFromReservas(reservas);
+        return getStockRepository().save(stock);
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stock
+     * @param ventasToRemove
+     * @return Stock
+     */
+    @Transactional
+    public Stock StockServiceImpl.removeFromVentas(Stock stock, Iterable<Long> ventasToRemove) {
+        List<Sell> ventas = getSellService().findAll(ventasToRemove);
+        stock.removeFromVentas(ventas);
+        return getStockRepository().save(stock);
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stock
+     * @param preciosVenta
+     * @return Stock
+     */
+    @Transactional
+    public Stock StockServiceImpl.setPreciosVenta(Stock stock, Iterable<Long> preciosVenta) {
+        List<PricePerProduct> items = getPricePerProductService().findAll(preciosVenta);
+        List<PricePerProduct> currents = stock.getPreciosVenta();
+        Set<PricePerProduct> toRemove = new HashSet<PricePerProduct>();
+        for (Iterator<PricePerProduct> iterator = currents.iterator(); iterator.hasNext();) {
+            PricePerProduct nextPricePerProduct = iterator.next();
+            if (items.contains(nextPricePerProduct)) {
+                items.remove(nextPricePerProduct);
+            } else {
+                toRemove.add(nextPricePerProduct);
+            }
+        }
+        stock.removeFromPreciosVenta(toRemove);
+        stock.addToPreciosVenta(items);
+        // Force the version update of the parent side to know that the parent has changed
+        // because it has new books assigned
+        stock.setVersion(stock.getVersion() + 1);
         return getStockRepository().save(stock);
     }
     
@@ -148,6 +287,34 @@ privileged aspect StockServiceImpl_Roo_Service_Impl {
      * TODO Auto-generated method documentation
      * 
      * @param stock
+     * @param ventas
+     * @return Stock
+     */
+    @Transactional
+    public Stock StockServiceImpl.setVentas(Stock stock, Iterable<Long> ventas) {
+        List<Sell> items = getSellService().findAll(ventas);
+        List<Sell> currents = stock.getVentas();
+        Set<Sell> toRemove = new HashSet<Sell>();
+        for (Iterator<Sell> iterator = currents.iterator(); iterator.hasNext();) {
+            Sell nextSell = iterator.next();
+            if (items.contains(nextSell)) {
+                items.remove(nextSell);
+            } else {
+                toRemove.add(nextSell);
+            }
+        }
+        stock.removeFromVentas(toRemove);
+        stock.addToVentas(items);
+        // Force the version update of the parent side to know that the parent has changed
+        // because it has new books assigned
+        stock.setVersion(stock.getVersion() + 1);
+        return getStockRepository().save(stock);
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stock
      */
     @Transactional
     public void StockServiceImpl.delete(Stock stock) {
@@ -156,8 +323,18 @@ privileged aspect StockServiceImpl_Roo_Service_Impl {
             stock.getProducto().getProductosStock().remove(stock);
         }
         
+        // Clear bidirectional one-to-many parent relationship with PricePerProduct
+        for (PricePerProduct item : stock.getPreciosVenta()) {
+            item.setStockItem(null);
+        }
+        
         // Clear bidirectional one-to-many parent relationship with Reservation
         for (Reservation item : stock.getReservas()) {
+            item.setStockItem(null);
+        }
+        
+        // Clear bidirectional one-to-many parent relationship with Sell
+        for (Sell item : stock.getVentas()) {
             item.setStockItem(null);
         }
         
@@ -283,33 +460,11 @@ privileged aspect StockServiceImpl_Roo_Service_Impl {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @param sell
-     * @param globalSearch
-     * @param pageable
-     * @return Page
-     */
-    public Page<Stock> StockServiceImpl.findBySell(Sell sell, GlobalSearch globalSearch, Pageable pageable) {
-        return getStockRepository().findBySell(sell, globalSearch, pageable);
-    }
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
      * @param producto
      * @return Long
      */
     public long StockServiceImpl.countByProducto(Product producto) {
         return getStockRepository().countByProducto(producto);
-    }
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     * @param sell
-     * @return Long
-     */
-    public long StockServiceImpl.countBySell(Sell sell) {
-        return getStockRepository().countBySell(sell);
     }
     
     /**

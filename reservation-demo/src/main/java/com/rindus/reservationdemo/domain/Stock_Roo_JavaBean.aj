@@ -3,6 +3,7 @@
 
 package com.rindus.reservationdemo.domain;
 
+import com.rindus.reservationdemo.domain.PricePerProduct;
 import com.rindus.reservationdemo.domain.Product;
 import com.rindus.reservationdemo.domain.Reservation;
 import com.rindus.reservationdemo.domain.Sell;
@@ -123,19 +124,37 @@ privileged aspect Stock_Roo_JavaBean {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @return Sell
+     * @return List
      */
-    public Sell Stock.getSell() {
-        return this.sell;
+    public List<Sell> Stock.getVentas() {
+        return this.ventas;
     }
     
     /**
      * TODO Auto-generated method documentation
      * 
-     * @param sell
+     * @param ventas
      */
-    public void Stock.setSell(Sell sell) {
-        this.sell = sell;
+    public void Stock.setVentas(List<Sell> ventas) {
+        this.ventas = ventas;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @return List
+     */
+    public List<PricePerProduct> Stock.getPreciosVenta() {
+        return this.preciosVenta;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param preciosVenta
+     */
+    public void Stock.setPreciosVenta(List<PricePerProduct> preciosVenta) {
+        this.preciosVenta = preciosVenta;
     }
     
 }

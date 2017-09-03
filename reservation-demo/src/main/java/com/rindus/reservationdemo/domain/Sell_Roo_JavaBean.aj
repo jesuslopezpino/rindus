@@ -4,7 +4,6 @@
 package com.rindus.reservationdemo.domain;
 
 import com.rindus.reservationdemo.domain.CustomerOrder;
-import com.rindus.reservationdemo.domain.PricePerProduct;
 import com.rindus.reservationdemo.domain.Sell;
 import com.rindus.reservationdemo.domain.Stock;
 
@@ -49,24 +48,6 @@ privileged aspect Sell_Roo_JavaBean {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @return CustomerOrder
-     */
-    public CustomerOrder Sell.getCustomerOrder() {
-        return this.customerOrder;
-    }
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     * @param customerOrder
-     */
-    public void Sell.setCustomerOrder(CustomerOrder customerOrder) {
-        this.customerOrder = customerOrder;
-    }
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
      * @return Stock
      */
     public Stock Sell.getStockItem() {
@@ -85,19 +66,19 @@ privileged aspect Sell_Roo_JavaBean {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @return PricePerProduct
+     * @return CustomerOrder
      */
-    public PricePerProduct Sell.getPriceSell() {
-        return this.priceSell;
+    public CustomerOrder Sell.getCustomerOrder() {
+        return this.customerOrder;
     }
     
     /**
      * TODO Auto-generated method documentation
      * 
-     * @param priceSell
+     * @param customerOrder
      */
-    public void Sell.setPriceSell(PricePerProduct priceSell) {
-        this.priceSell = priceSell;
+    public void Sell.setCustomerOrder(CustomerOrder customerOrder) {
+        this.customerOrder = customerOrder;
     }
     
 }

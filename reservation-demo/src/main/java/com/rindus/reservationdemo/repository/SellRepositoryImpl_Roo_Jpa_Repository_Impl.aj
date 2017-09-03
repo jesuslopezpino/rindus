@@ -8,6 +8,7 @@ import com.querydsl.jpa.JPQLQuery;
 import com.rindus.reservationdemo.domain.CustomerOrder;
 import com.rindus.reservationdemo.domain.QSell;
 import com.rindus.reservationdemo.domain.Sell;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.repository.SellRepositoryCustom;
 import com.rindus.reservationdemo.repository.SellRepositoryImpl;
 import io.springlets.data.domain.GlobalSearch;
@@ -28,19 +29,13 @@ privileged aspect SellRepositoryImpl_Roo_Jpa_Repository_Impl {
      * TODO Auto-generated attribute documentation
      * 
      */
-    public static final String SellRepositoryImpl.CUSTOMER_ORDER = "customerOrder";
-    
-    /**
-     * TODO Auto-generated attribute documentation
-     * 
-     */
     public static final String SellRepositoryImpl.STOCK_ITEM = "stockItem";
     
     /**
      * TODO Auto-generated attribute documentation
      * 
      */
-    public static final String SellRepositoryImpl.PRICE_SELL = "priceSell";
+    public static final String SellRepositoryImpl.CUSTOMER_ORDER = "customerOrder";
     
     /**
      * TODO Auto-generated method documentation
@@ -55,13 +50,12 @@ privileged aspect SellRepositoryImpl_Roo_Jpa_Repository_Impl {
         
         JPQLQuery<Sell> query = from(sell);
         
-        Path<?>[] paths = new Path<?>[] {sell.customerOrder,sell.stockItem,sell.priceSell};        
+        Path<?>[] paths = new Path<?>[] {sell.stockItem,sell.customerOrder};        
         applyGlobalSearch(globalSearch, query, paths);
         
         AttributeMappingBuilder mapping = buildMapper()
-			.map(CUSTOMER_ORDER, sell.customerOrder)
 			.map(STOCK_ITEM, sell.stockItem)
-			.map(PRICE_SELL, sell.priceSell);
+			.map(CUSTOMER_ORDER, sell.customerOrder);
         
         applyPagination(pageable, query, mapping);
         applyOrderById(query);
@@ -83,16 +77,15 @@ privileged aspect SellRepositoryImpl_Roo_Jpa_Repository_Impl {
         
         JPQLQuery<Sell> query = from(sell);
         
-        Path<?>[] paths = new Path<?>[] {sell.customerOrder,sell.stockItem,sell.priceSell};        
+        Path<?>[] paths = new Path<?>[] {sell.stockItem,sell.customerOrder};        
         applyGlobalSearch(globalSearch, query, paths);
         
         // Also, filter by the provided ids
         query.where(sell.id.in(ids));
         
         AttributeMappingBuilder mapping = buildMapper()
-			.map(CUSTOMER_ORDER, sell.customerOrder)
 			.map(STOCK_ITEM, sell.stockItem)
-			.map(PRICE_SELL, sell.priceSell);
+			.map(CUSTOMER_ORDER, sell.customerOrder);
         
         applyPagination(pageable, query, mapping);
         applyOrderById(query);
@@ -117,13 +110,42 @@ privileged aspect SellRepositoryImpl_Roo_Jpa_Repository_Impl {
         Assert.notNull(customerOrder, "customerOrder is required");
         
         query.where(sell.customerOrder.eq(customerOrder));
-        Path<?>[] paths = new Path<?>[] {sell.customerOrder,sell.stockItem,sell.priceSell};        
+        Path<?>[] paths = new Path<?>[] {sell.stockItem,sell.customerOrder};        
         applyGlobalSearch(globalSearch, query, paths);
         
         AttributeMappingBuilder mapping = buildMapper()
-			.map(CUSTOMER_ORDER, sell.customerOrder)
 			.map(STOCK_ITEM, sell.stockItem)
-			.map(PRICE_SELL, sell.priceSell);
+			.map(CUSTOMER_ORDER, sell.customerOrder);
+        
+        applyPagination(pageable, query, mapping);
+        applyOrderById(query);
+        
+        return loadPage(query, pageable, sell);
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stockItem
+     * @param globalSearch
+     * @param pageable
+     * @return Page
+     */
+    public Page<Sell> SellRepositoryImpl.findByStockItem(Stock stockItem, GlobalSearch globalSearch, Pageable pageable) {
+        
+        QSell sell = QSell.sell;
+        
+        JPQLQuery<Sell> query = from(sell);
+        
+        Assert.notNull(stockItem, "stockItem is required");
+        
+        query.where(sell.stockItem.eq(stockItem));
+        Path<?>[] paths = new Path<?>[] {sell.stockItem,sell.customerOrder};        
+        applyGlobalSearch(globalSearch, query, paths);
+        
+        AttributeMappingBuilder mapping = buildMapper()
+			.map(STOCK_ITEM, sell.stockItem)
+			.map(CUSTOMER_ORDER, sell.customerOrder);
         
         applyPagination(pageable, query, mapping);
         applyOrderById(query);

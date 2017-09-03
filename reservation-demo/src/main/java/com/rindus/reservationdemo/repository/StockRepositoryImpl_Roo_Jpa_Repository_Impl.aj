@@ -7,7 +7,6 @@ import com.querydsl.core.types.Path;
 import com.querydsl.jpa.JPQLQuery;
 import com.rindus.reservationdemo.domain.Product;
 import com.rindus.reservationdemo.domain.QStock;
-import com.rindus.reservationdemo.domain.Sell;
 import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.repository.StockRepositoryCustom;
 import com.rindus.reservationdemo.repository.StockRepositoryImpl;
@@ -44,12 +43,6 @@ privileged aspect StockRepositoryImpl_Roo_Jpa_Repository_Impl {
     public static final String StockRepositoryImpl.DATE_OUT = "dateOut";
     
     /**
-     * TODO Auto-generated attribute documentation
-     * 
-     */
-    public static final String StockRepositoryImpl.SELL = "sell";
-    
-    /**
      * TODO Auto-generated method documentation
      * 
      * @param globalSearch
@@ -62,14 +55,13 @@ privileged aspect StockRepositoryImpl_Roo_Jpa_Repository_Impl {
         
         JPQLQuery<Stock> query = from(stock);
         
-        Path<?>[] paths = new Path<?>[] {stock.producto,stock.dateIn,stock.dateOut,stock.sell};        
+        Path<?>[] paths = new Path<?>[] {stock.producto,stock.dateIn,stock.dateOut};        
         applyGlobalSearch(globalSearch, query, paths);
         
         AttributeMappingBuilder mapping = buildMapper()
 			.map(PRODUCTO, stock.producto)
 			.map(DATE_IN, stock.dateIn)
-			.map(DATE_OUT, stock.dateOut)
-			.map(SELL, stock.sell);
+			.map(DATE_OUT, stock.dateOut);
         
         applyPagination(pageable, query, mapping);
         applyOrderById(query);
@@ -91,7 +83,7 @@ privileged aspect StockRepositoryImpl_Roo_Jpa_Repository_Impl {
         
         JPQLQuery<Stock> query = from(stock);
         
-        Path<?>[] paths = new Path<?>[] {stock.producto,stock.dateIn,stock.dateOut,stock.sell};        
+        Path<?>[] paths = new Path<?>[] {stock.producto,stock.dateIn,stock.dateOut};        
         applyGlobalSearch(globalSearch, query, paths);
         
         // Also, filter by the provided ids
@@ -100,8 +92,7 @@ privileged aspect StockRepositoryImpl_Roo_Jpa_Repository_Impl {
         AttributeMappingBuilder mapping = buildMapper()
 			.map(PRODUCTO, stock.producto)
 			.map(DATE_IN, stock.dateIn)
-			.map(DATE_OUT, stock.dateOut)
-			.map(SELL, stock.sell);
+			.map(DATE_OUT, stock.dateOut);
         
         applyPagination(pageable, query, mapping);
         applyOrderById(query);
@@ -126,46 +117,13 @@ privileged aspect StockRepositoryImpl_Roo_Jpa_Repository_Impl {
         Assert.notNull(producto, "producto is required");
         
         query.where(stock.producto.eq(producto));
-        Path<?>[] paths = new Path<?>[] {stock.producto,stock.dateIn,stock.dateOut,stock.sell};        
+        Path<?>[] paths = new Path<?>[] {stock.producto,stock.dateIn,stock.dateOut};        
         applyGlobalSearch(globalSearch, query, paths);
         
         AttributeMappingBuilder mapping = buildMapper()
 			.map(PRODUCTO, stock.producto)
 			.map(DATE_IN, stock.dateIn)
-			.map(DATE_OUT, stock.dateOut)
-			.map(SELL, stock.sell);
-        
-        applyPagination(pageable, query, mapping);
-        applyOrderById(query);
-        
-        return loadPage(query, pageable, stock);
-    }
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     * @param sell
-     * @param globalSearch
-     * @param pageable
-     * @return Page
-     */
-    public Page<Stock> StockRepositoryImpl.findBySell(Sell sell, GlobalSearch globalSearch, Pageable pageable) {
-        
-        QStock stock = QStock.stock;
-        
-        JPQLQuery<Stock> query = from(stock);
-        
-        Assert.notNull(sell, "sell is required");
-        
-        query.where(stock.sell.eq(sell));
-        Path<?>[] paths = new Path<?>[] {stock.producto,stock.dateIn,stock.dateOut,stock.sell};        
-        applyGlobalSearch(globalSearch, query, paths);
-        
-        AttributeMappingBuilder mapping = buildMapper()
-			.map(PRODUCTO, stock.producto)
-			.map(DATE_IN, stock.dateIn)
-			.map(DATE_OUT, stock.dateOut)
-			.map(SELL, stock.sell);
+			.map(DATE_OUT, stock.dateOut);
         
         applyPagination(pageable, query, mapping);
         applyOrderById(query);

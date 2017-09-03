@@ -5,15 +5,22 @@ package com.rindus.reservationdemo.web;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.rindus.reservationdemo.domain.PricePerProduct;
 import com.rindus.reservationdemo.domain.Product;
 import com.rindus.reservationdemo.domain.Reservation;
 import com.rindus.reservationdemo.domain.Sell;
 import com.rindus.reservationdemo.web.ProductDeserializer;
-import com.rindus.reservationdemo.web.SellDeserializer;
 import com.rindus.reservationdemo.web.StockJsonMixin;
 import java.util.List;
 
 privileged aspect StockJsonMixin_Roo_JSONMixin {
+    
+    /**
+     * TODO Auto-generated attribute documentation
+     * 
+     */
+    @JsonIgnore
+    private List<PricePerProduct> StockJsonMixin.preciosVenta;
     
     /**
      * TODO Auto-generated attribute documentation
@@ -26,15 +33,33 @@ privileged aspect StockJsonMixin_Roo_JSONMixin {
      * TODO Auto-generated attribute documentation
      * 
      */
-    @JsonDeserialize(using = ProductDeserializer.class)
-    private Product StockJsonMixin.producto;
+    @JsonIgnore
+    private List<Sell> StockJsonMixin.ventas;
     
     /**
      * TODO Auto-generated attribute documentation
      * 
      */
-    @JsonDeserialize(using = SellDeserializer.class)
-    private Sell StockJsonMixin.sell;
+    @JsonDeserialize(using = ProductDeserializer.class)
+    private Product StockJsonMixin.producto;
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @return List
+     */
+    public List<PricePerProduct> StockJsonMixin.getPreciosVenta() {
+        return preciosVenta;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param preciosVenta
+     */
+    public void StockJsonMixin.setPreciosVenta(List<PricePerProduct> preciosVenta) {
+        this.preciosVenta = preciosVenta;
+    }
     
     /**
      * TODO Auto-generated method documentation
@@ -57,6 +82,24 @@ privileged aspect StockJsonMixin_Roo_JSONMixin {
     /**
      * TODO Auto-generated method documentation
      * 
+     * @return List
+     */
+    public List<Sell> StockJsonMixin.getVentas() {
+        return ventas;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param ventas
+     */
+    public void StockJsonMixin.setVentas(List<Sell> ventas) {
+        this.ventas = ventas;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
      * @return Product
      */
     public Product StockJsonMixin.getProducto() {
@@ -70,24 +113,6 @@ privileged aspect StockJsonMixin_Roo_JSONMixin {
      */
     public void StockJsonMixin.setProducto(Product producto) {
         this.producto = producto;
-    }
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     * @return Sell
-     */
-    public Sell StockJsonMixin.getSell() {
-        return sell;
-    }
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     * @param sell
-     */
-    public void StockJsonMixin.setSell(Sell sell) {
-        this.sell = sell;
     }
     
 }

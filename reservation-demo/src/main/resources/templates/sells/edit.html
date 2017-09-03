@@ -56,17 +56,6 @@
              <fieldset id="containerFields">
               <legend class="sr-only" data-th-text="#{label_data_entity(#{label_sell})}">Sell data </legend>
 
-<div class="form-group has-error has-feedback" data-z="27de6101" id="sell-customerorder-field" data-th-classappend="${#fields.hasErrors('customerOrder')}? 'has-error has-feedback'" data-th-class="form-group" data-th-with="collectionLink=${@linkBuilder.of('CustomerOrdersCollectionThymeleafController')}">
-    <label for="customerOrder" class="col-md-3 control-label" data-th-text="#{label_sell_customerorder}">CustomerOrder</label>
-    <div class="col-md-6">
-      <!-- Select2 -->
-      <select data-th-field="*{customerOrder}" class="form-control dropdown-select-ajax" data-allow-clear="true" data-data-ajax--url="${collectionLink.to('select2')}" data-ajax--cache="true" data-ajax--delay="250" data-ajax--data-type="json" data-data-placeholder="#{info_select_an_option}">
-          <option data-th-unless="*{customerOrder} == null" data-th-value="*{customerOrder.id}" data-th-text="*{{customerOrder}}" selected="selected">CustomerOrder</option>
-      </select>
-      <span data-th-classappend="${#fields.hasErrors('customerOrder')}? 'glyphicon glyphicon-remove form-control-feedback'" class="glyphicon glyphicon-remove form-control-feedback" data-th-if="${#fields.hasErrors('customerOrder')}" aria-hidden="true"></span>
-      <span id="customerOrder-error" class="help-block" data-th-if="${#fields.hasErrors('customerOrder')}" data-th-errors="*{customerOrder}">Error message.</span>
-    </div>
-</div>
 <div class="form-group has-error has-feedback" data-z="84f7ab21" id="sell-stockitem-field" data-th-classappend="${#fields.hasErrors('stockItem')}? 'has-error has-feedback'" data-th-class="form-group" data-th-with="collectionLink=${@linkBuilder.of('StocksCollectionThymeleafController')}">
     <label for="stockItem" class="col-md-3 control-label" data-th-text="#{label_sell_stockitem}">Stock</label>
     <div class="col-md-6">
@@ -78,15 +67,15 @@
       <span id="stockItem-error" class="help-block" data-th-if="${#fields.hasErrors('stockItem')}" data-th-errors="*{stockItem}">Error message.</span>
     </div>
 </div>
-<div class="form-group has-error has-feedback" data-z="b893d4e1" id="sell-pricesell-field" data-th-classappend="${#fields.hasErrors('priceSell')}? 'has-error has-feedback'" data-th-class="form-group" data-th-with="collectionLink=${@linkBuilder.of('PricePerProductsCollectionThymeleafController')}">
-    <label for="priceSell" class="col-md-3 control-label" data-th-text="#{label_sell_pricesell}">PricePerProduct</label>
+<div class="form-group has-error has-feedback" data-z="27de6101" id="sell-customerorder-field" data-th-classappend="${#fields.hasErrors('customerOrder')}? 'has-error has-feedback'" data-th-class="form-group" data-th-with="collectionLink=${@linkBuilder.of('CustomerOrdersCollectionThymeleafController')}">
+    <label for="customerOrder" class="col-md-3 control-label" data-th-text="#{label_sell_customerorder}">CustomerOrder</label>
     <div class="col-md-6">
       <!-- Select2 -->
-      <select data-th-field="*{priceSell}" class="form-control dropdown-select-ajax" data-allow-clear="true" data-data-ajax--url="${collectionLink.to('select2')}" data-ajax--cache="true" data-ajax--delay="250" data-ajax--data-type="json" data-data-placeholder="#{info_select_an_option}">
-          <option data-th-unless="*{priceSell} == null" data-th-value="*{priceSell.id}" data-th-text="*{{priceSell}}" selected="selected">PricePerProduct</option>
+      <select data-th-field="*{customerOrder}" class="form-control dropdown-select-ajax" data-allow-clear="true" data-data-ajax--url="${collectionLink.to('select2')}" data-ajax--cache="true" data-ajax--delay="250" data-ajax--data-type="json" data-data-placeholder="#{info_select_an_option}">
+          <option data-th-unless="*{customerOrder} == null" data-th-value="*{customerOrder.id}" data-th-text="*{{customerOrder}}" selected="selected">CustomerOrder</option>
       </select>
-      <span data-th-classappend="${#fields.hasErrors('priceSell')}? 'glyphicon glyphicon-remove form-control-feedback'" class="glyphicon glyphicon-remove form-control-feedback" data-th-if="${#fields.hasErrors('priceSell')}" aria-hidden="true"></span>
-      <span id="priceSell-error" class="help-block" data-th-if="${#fields.hasErrors('priceSell')}" data-th-errors="*{priceSell}">Error message.</span>
+      <span data-th-classappend="${#fields.hasErrors('customerOrder')}? 'glyphicon glyphicon-remove form-control-feedback'" class="glyphicon glyphicon-remove form-control-feedback" data-th-if="${#fields.hasErrors('customerOrder')}" aria-hidden="true"></span>
+      <span id="customerOrder-error" class="help-block" data-th-if="${#fields.hasErrors('customerOrder')}" data-th-errors="*{customerOrder}">Error message.</span>
     </div>
 </div>
              </fieldset>

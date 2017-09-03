@@ -4,7 +4,6 @@
 package com.rindus.reservationdemo.repository;
 
 import com.rindus.reservationdemo.domain.Product;
-import com.rindus.reservationdemo.domain.Sell;
 import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.repository.StockRepository;
 import com.rindus.reservationdemo.repository.StockRepositoryCustom;
@@ -18,14 +17,6 @@ privileged aspect StockRepository_Roo_Jpa_Repository {
     declare parents: StockRepository extends StockRepositoryCustom;
     
     declare @type: StockRepository: @Transactional(readOnly = true);
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     * @param sell
-     * @return Long
-     */
-    public abstract long StockRepository.countBySell(Sell sell);
     
     /**
      * TODO Auto-generated method documentation

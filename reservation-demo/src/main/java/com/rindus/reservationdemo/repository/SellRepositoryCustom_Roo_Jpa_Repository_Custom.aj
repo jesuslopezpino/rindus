@@ -5,6 +5,7 @@ package com.rindus.reservationdemo.repository;
 
 import com.rindus.reservationdemo.domain.CustomerOrder;
 import com.rindus.reservationdemo.domain.Sell;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.repository.SellRepositoryCustom;
 import io.springlets.data.domain.GlobalSearch;
 import java.util.List;
@@ -22,6 +23,16 @@ privileged aspect SellRepositoryCustom_Roo_Jpa_Repository_Custom {
      * @return Page
      */
     public abstract Page<Sell> SellRepositoryCustom.findByCustomerOrder(CustomerOrder customerOrder, GlobalSearch globalSearch, Pageable pageable);
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stockItem
+     * @param globalSearch
+     * @param pageable
+     * @return Page
+     */
+    public abstract Page<Sell> SellRepositoryCustom.findByStockItem(Stock stockItem, GlobalSearch globalSearch, Pageable pageable);
     
     /**
      * TODO Auto-generated method documentation

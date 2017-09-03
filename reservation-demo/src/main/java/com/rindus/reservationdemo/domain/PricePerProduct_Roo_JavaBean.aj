@@ -5,7 +5,7 @@ package com.rindus.reservationdemo.domain;
 
 import com.rindus.reservationdemo.domain.PricePerProduct;
 import com.rindus.reservationdemo.domain.Product;
-import com.rindus.reservationdemo.domain.Sell;
+import com.rindus.reservationdemo.domain.Stock;
 import java.util.Date;
 
 privileged aspect PricePerProduct_Roo_JavaBean {
@@ -67,6 +67,24 @@ privileged aspect PricePerProduct_Roo_JavaBean {
     /**
      * TODO Auto-generated method documentation
      * 
+     * @return Stock
+     */
+    public Stock PricePerProduct.getStockItem() {
+        return this.stockItem;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stockItem
+     */
+    public void PricePerProduct.setStockItem(Stock stockItem) {
+        this.stockItem = stockItem;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
      * @return Long
      */
     public Long PricePerProduct.getPrice() {
@@ -116,24 +134,6 @@ privileged aspect PricePerProduct_Roo_JavaBean {
      */
     public void PricePerProduct.setEndPrice(Date endPrice) {
         this.endPrice = endPrice;
-    }
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     * @return Sell
-     */
-    public Sell PricePerProduct.getSell() {
-        return this.sell;
-    }
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     * @param sell
-     */
-    public void PricePerProduct.setSell(Sell sell) {
-        this.sell = sell;
     }
     
 }

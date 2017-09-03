@@ -4,7 +4,6 @@
 package com.rindus.reservationdemo.service.api;
 
 import com.rindus.reservationdemo.domain.Product;
-import com.rindus.reservationdemo.domain.Sell;
 import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.service.api.StockService;
 import io.springlets.data.domain.GlobalSearch;
@@ -108,6 +107,33 @@ privileged aspect StockService_Roo_Service {
      * TODO Auto-generated method documentation
      * 
      * @param stock
+     * @param preciosVentaToAdd
+     * @return Stock
+     */
+    public abstract Stock StockService.addToPreciosVenta(Stock stock, Iterable<Long> preciosVentaToAdd);
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stock
+     * @param preciosVentaToRemove
+     * @return Stock
+     */
+    public abstract Stock StockService.removeFromPreciosVenta(Stock stock, Iterable<Long> preciosVentaToRemove);
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stock
+     * @param preciosVenta
+     * @return Stock
+     */
+    public abstract Stock StockService.setPreciosVenta(Stock stock, Iterable<Long> preciosVenta);
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stock
      * @param reservasToAdd
      * @return Stock
      */
@@ -134,6 +160,33 @@ privileged aspect StockService_Roo_Service {
     /**
      * TODO Auto-generated method documentation
      * 
+     * @param stock
+     * @param ventasToAdd
+     * @return Stock
+     */
+    public abstract Stock StockService.addToVentas(Stock stock, Iterable<Long> ventasToAdd);
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stock
+     * @param ventasToRemove
+     * @return Stock
+     */
+    public abstract Stock StockService.removeFromVentas(Stock stock, Iterable<Long> ventasToRemove);
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stock
+     * @param ventas
+     * @return Stock
+     */
+    public abstract Stock StockService.setVentas(Stock stock, Iterable<Long> ventas);
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
      * @param producto
      * @param globalSearch
      * @param pageable
@@ -144,27 +197,9 @@ privileged aspect StockService_Roo_Service {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @param sell
-     * @param globalSearch
-     * @param pageable
-     * @return Page
-     */
-    public abstract Page<Stock> StockService.findBySell(Sell sell, GlobalSearch globalSearch, Pageable pageable);
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
      * @param producto
      * @return Long
      */
     public abstract long StockService.countByProducto(Product producto);
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     * @param sell
-     * @return Long
-     */
-    public abstract long StockService.countBySell(Sell sell);
     
 }

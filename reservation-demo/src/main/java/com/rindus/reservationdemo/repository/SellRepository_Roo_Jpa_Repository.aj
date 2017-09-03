@@ -5,6 +5,7 @@ package com.rindus.reservationdemo.repository;
 
 import com.rindus.reservationdemo.domain.CustomerOrder;
 import com.rindus.reservationdemo.domain.Sell;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.repository.SellRepository;
 import com.rindus.reservationdemo.repository.SellRepositoryCustom;
 import io.springlets.data.jpa.repository.DetachableJpaRepository;
@@ -25,5 +26,13 @@ privileged aspect SellRepository_Roo_Jpa_Repository {
      * @return Long
      */
     public abstract long SellRepository.countByCustomerOrder(CustomerOrder customerOrder);
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stockItem
+     * @return Long
+     */
+    public abstract long SellRepository.countByStockItem(Stock stockItem);
     
 }

@@ -5,7 +5,7 @@ package com.rindus.reservationdemo.repository;
 
 import com.rindus.reservationdemo.domain.PricePerProduct;
 import com.rindus.reservationdemo.domain.Product;
-import com.rindus.reservationdemo.domain.Sell;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.repository.PricePerProductRepository;
 import com.rindus.reservationdemo.repository.PricePerProductRepositoryCustom;
 import io.springlets.data.jpa.repository.DetachableJpaRepository;
@@ -22,10 +22,10 @@ privileged aspect PricePerProductRepository_Roo_Jpa_Repository {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @param sell
+     * @param stockItem
      * @return Long
      */
-    public abstract long PricePerProductRepository.countBySell(Sell sell);
+    public abstract long PricePerProductRepository.countByStockItem(Stock stockItem);
     
     /**
      * TODO Auto-generated method documentation

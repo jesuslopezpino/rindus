@@ -10,9 +10,6 @@ import javax.persistence.Version;
 import io.springlets.format.EntityFormat;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import org.springframework.roo.addon.jpa.annotations.entity.JpaRelationType;
-import org.springframework.roo.addon.jpa.annotations.entity.RooJpaRelation;
 
 /**
  * = Sell
@@ -47,23 +44,13 @@ public class Sell {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @EntityFormat
-    private CustomerOrder customerOrder;
-
-    /**
-     * TODO Auto-generated attribute documentation
-     *
-     */
-    @OneToOne(cascade = { javax.persistence.CascadeType.MERGE, javax.persistence.CascadeType.PERSIST }, fetch = FetchType.LAZY, mappedBy = "sell")
-    @RooJpaRelation(type = JpaRelationType.AGGREGATION)
-    @EntityFormat
     private Stock stockItem;
 
     /**
      * TODO Auto-generated attribute documentation
      *
      */
-    @OneToOne(cascade = { javax.persistence.CascadeType.MERGE, javax.persistence.CascadeType.PERSIST }, fetch = FetchType.LAZY, mappedBy = "sell")
-    @RooJpaRelation(type = JpaRelationType.AGGREGATION)
+    @ManyToOne(fetch = FetchType.LAZY)
     @EntityFormat
-    private PricePerProduct priceSell;
+    private CustomerOrder customerOrder;
 }

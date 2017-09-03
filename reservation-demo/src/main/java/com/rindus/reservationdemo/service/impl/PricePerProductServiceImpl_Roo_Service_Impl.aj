@@ -5,7 +5,7 @@ package com.rindus.reservationdemo.service.impl;
 
 import com.rindus.reservationdemo.domain.PricePerProduct;
 import com.rindus.reservationdemo.domain.Product;
-import com.rindus.reservationdemo.domain.Sell;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.repository.PricePerProductRepository;
 import com.rindus.reservationdemo.service.impl.PricePerProductServiceImpl;
 import io.springlets.data.domain.GlobalSearch;
@@ -63,6 +63,11 @@ privileged aspect PricePerProductServiceImpl_Roo_Service_Impl {
      */
     @Transactional
     public void PricePerProductServiceImpl.delete(PricePerProduct pricePerProduct) {
+        // Clear bidirectional many-to-one child relationship with Stock
+        if (pricePerProduct.getStockItem() != null) {
+            pricePerProduct.getStockItem().getPreciosVenta().remove(pricePerProduct);
+        }
+        
         // Clear bidirectional many-to-one child relationship with Product
         if (pricePerProduct.getProducto() != null) {
             pricePerProduct.getProducto().getPreciosPorProducto().remove(pricePerProduct);
@@ -190,13 +195,13 @@ privileged aspect PricePerProductServiceImpl_Roo_Service_Impl {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @param sell
+     * @param stockItem
      * @param globalSearch
      * @param pageable
      * @return Page
      */
-    public Page<PricePerProduct> PricePerProductServiceImpl.findBySell(Sell sell, GlobalSearch globalSearch, Pageable pageable) {
-        return getPricePerProductRepository().findBySell(sell, globalSearch, pageable);
+    public Page<PricePerProduct> PricePerProductServiceImpl.findByStockItem(Stock stockItem, GlobalSearch globalSearch, Pageable pageable) {
+        return getPricePerProductRepository().findByStockItem(stockItem, globalSearch, pageable);
     }
     
     /**
@@ -212,11 +217,11 @@ privileged aspect PricePerProductServiceImpl_Roo_Service_Impl {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @param sell
+     * @param stockItem
      * @return Long
      */
-    public long PricePerProductServiceImpl.countBySell(Sell sell) {
-        return getPricePerProductRepository().countBySell(sell);
+    public long PricePerProductServiceImpl.countByStockItem(Stock stockItem) {
+        return getPricePerProductRepository().countByStockItem(stockItem);
     }
     
     /**

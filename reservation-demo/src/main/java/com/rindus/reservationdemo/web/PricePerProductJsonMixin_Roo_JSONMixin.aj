@@ -5,10 +5,10 @@ package com.rindus.reservationdemo.web;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.rindus.reservationdemo.domain.Product;
-import com.rindus.reservationdemo.domain.Sell;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.web.PricePerProductJsonMixin;
 import com.rindus.reservationdemo.web.ProductDeserializer;
-import com.rindus.reservationdemo.web.SellDeserializer;
+import com.rindus.reservationdemo.web.StockDeserializer;
 
 privileged aspect PricePerProductJsonMixin_Roo_JSONMixin {
     
@@ -23,8 +23,8 @@ privileged aspect PricePerProductJsonMixin_Roo_JSONMixin {
      * TODO Auto-generated attribute documentation
      * 
      */
-    @JsonDeserialize(using = SellDeserializer.class)
-    private Sell PricePerProductJsonMixin.sell;
+    @JsonDeserialize(using = StockDeserializer.class)
+    private Stock PricePerProductJsonMixin.stockItem;
     
     /**
      * TODO Auto-generated method documentation
@@ -47,19 +47,19 @@ privileged aspect PricePerProductJsonMixin_Roo_JSONMixin {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @return Sell
+     * @return Stock
      */
-    public Sell PricePerProductJsonMixin.getSell() {
-        return sell;
+    public Stock PricePerProductJsonMixin.getStockItem() {
+        return stockItem;
     }
     
     /**
      * TODO Auto-generated method documentation
      * 
-     * @param sell
+     * @param stockItem
      */
-    public void PricePerProductJsonMixin.setSell(Sell sell) {
-        this.sell = sell;
+    public void PricePerProductJsonMixin.setStockItem(Stock stockItem) {
+        this.stockItem = stockItem;
     }
     
 }

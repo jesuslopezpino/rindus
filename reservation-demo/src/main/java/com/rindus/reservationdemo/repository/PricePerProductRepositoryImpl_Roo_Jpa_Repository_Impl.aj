@@ -8,7 +8,7 @@ import com.querydsl.jpa.JPQLQuery;
 import com.rindus.reservationdemo.domain.PricePerProduct;
 import com.rindus.reservationdemo.domain.Product;
 import com.rindus.reservationdemo.domain.QPricePerProduct;
-import com.rindus.reservationdemo.domain.Sell;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.repository.PricePerProductRepositoryCustom;
 import com.rindus.reservationdemo.repository.PricePerProductRepositoryImpl;
 import io.springlets.data.domain.GlobalSearch;
@@ -35,6 +35,12 @@ privileged aspect PricePerProductRepositoryImpl_Roo_Jpa_Repository_Impl {
      * TODO Auto-generated attribute documentation
      * 
      */
+    public static final String PricePerProductRepositoryImpl.STOCK_ITEM = "stockItem";
+    
+    /**
+     * TODO Auto-generated attribute documentation
+     * 
+     */
     public static final String PricePerProductRepositoryImpl.PRICE = "price";
     
     /**
@@ -50,12 +56,6 @@ privileged aspect PricePerProductRepositoryImpl_Roo_Jpa_Repository_Impl {
     public static final String PricePerProductRepositoryImpl.END_PRICE = "endPrice";
     
     /**
-     * TODO Auto-generated attribute documentation
-     * 
-     */
-    public static final String PricePerProductRepositoryImpl.SELL = "sell";
-    
-    /**
      * TODO Auto-generated method documentation
      * 
      * @param globalSearch
@@ -68,15 +68,15 @@ privileged aspect PricePerProductRepositoryImpl_Roo_Jpa_Repository_Impl {
         
         JPQLQuery<PricePerProduct> query = from(pricePerProduct);
         
-        Path<?>[] paths = new Path<?>[] {pricePerProduct.producto,pricePerProduct.price,pricePerProduct.startPrice,pricePerProduct.endPrice,pricePerProduct.sell};        
+        Path<?>[] paths = new Path<?>[] {pricePerProduct.producto,pricePerProduct.stockItem,pricePerProduct.price,pricePerProduct.startPrice,pricePerProduct.endPrice};        
         applyGlobalSearch(globalSearch, query, paths);
         
         AttributeMappingBuilder mapping = buildMapper()
 			.map(PRODUCTO, pricePerProduct.producto)
+			.map(STOCK_ITEM, pricePerProduct.stockItem)
 			.map(PRICE, pricePerProduct.price)
 			.map(START_PRICE, pricePerProduct.startPrice)
-			.map(END_PRICE, pricePerProduct.endPrice)
-			.map(SELL, pricePerProduct.sell);
+			.map(END_PRICE, pricePerProduct.endPrice);
         
         applyPagination(pageable, query, mapping);
         applyOrderById(query);
@@ -98,7 +98,7 @@ privileged aspect PricePerProductRepositoryImpl_Roo_Jpa_Repository_Impl {
         
         JPQLQuery<PricePerProduct> query = from(pricePerProduct);
         
-        Path<?>[] paths = new Path<?>[] {pricePerProduct.producto,pricePerProduct.price,pricePerProduct.startPrice,pricePerProduct.endPrice,pricePerProduct.sell};        
+        Path<?>[] paths = new Path<?>[] {pricePerProduct.producto,pricePerProduct.stockItem,pricePerProduct.price,pricePerProduct.startPrice,pricePerProduct.endPrice};        
         applyGlobalSearch(globalSearch, query, paths);
         
         // Also, filter by the provided ids
@@ -106,10 +106,10 @@ privileged aspect PricePerProductRepositoryImpl_Roo_Jpa_Repository_Impl {
         
         AttributeMappingBuilder mapping = buildMapper()
 			.map(PRODUCTO, pricePerProduct.producto)
+			.map(STOCK_ITEM, pricePerProduct.stockItem)
 			.map(PRICE, pricePerProduct.price)
 			.map(START_PRICE, pricePerProduct.startPrice)
-			.map(END_PRICE, pricePerProduct.endPrice)
-			.map(SELL, pricePerProduct.sell);
+			.map(END_PRICE, pricePerProduct.endPrice);
         
         applyPagination(pageable, query, mapping);
         applyOrderById(query);
@@ -134,15 +134,15 @@ privileged aspect PricePerProductRepositoryImpl_Roo_Jpa_Repository_Impl {
         Assert.notNull(producto, "producto is required");
         
         query.where(pricePerProduct.producto.eq(producto));
-        Path<?>[] paths = new Path<?>[] {pricePerProduct.producto,pricePerProduct.price,pricePerProduct.startPrice,pricePerProduct.endPrice,pricePerProduct.sell};        
+        Path<?>[] paths = new Path<?>[] {pricePerProduct.producto,pricePerProduct.stockItem,pricePerProduct.price,pricePerProduct.startPrice,pricePerProduct.endPrice};        
         applyGlobalSearch(globalSearch, query, paths);
         
         AttributeMappingBuilder mapping = buildMapper()
 			.map(PRODUCTO, pricePerProduct.producto)
+			.map(STOCK_ITEM, pricePerProduct.stockItem)
 			.map(PRICE, pricePerProduct.price)
 			.map(START_PRICE, pricePerProduct.startPrice)
-			.map(END_PRICE, pricePerProduct.endPrice)
-			.map(SELL, pricePerProduct.sell);
+			.map(END_PRICE, pricePerProduct.endPrice);
         
         applyPagination(pageable, query, mapping);
         applyOrderById(query);
@@ -153,29 +153,29 @@ privileged aspect PricePerProductRepositoryImpl_Roo_Jpa_Repository_Impl {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @param sell
+     * @param stockItem
      * @param globalSearch
      * @param pageable
      * @return Page
      */
-    public Page<PricePerProduct> PricePerProductRepositoryImpl.findBySell(Sell sell, GlobalSearch globalSearch, Pageable pageable) {
+    public Page<PricePerProduct> PricePerProductRepositoryImpl.findByStockItem(Stock stockItem, GlobalSearch globalSearch, Pageable pageable) {
         
         QPricePerProduct pricePerProduct = QPricePerProduct.pricePerProduct;
         
         JPQLQuery<PricePerProduct> query = from(pricePerProduct);
         
-        Assert.notNull(sell, "sell is required");
+        Assert.notNull(stockItem, "stockItem is required");
         
-        query.where(pricePerProduct.sell.eq(sell));
-        Path<?>[] paths = new Path<?>[] {pricePerProduct.producto,pricePerProduct.price,pricePerProduct.startPrice,pricePerProduct.endPrice,pricePerProduct.sell};        
+        query.where(pricePerProduct.stockItem.eq(stockItem));
+        Path<?>[] paths = new Path<?>[] {pricePerProduct.producto,pricePerProduct.stockItem,pricePerProduct.price,pricePerProduct.startPrice,pricePerProduct.endPrice};        
         applyGlobalSearch(globalSearch, query, paths);
         
         AttributeMappingBuilder mapping = buildMapper()
 			.map(PRODUCTO, pricePerProduct.producto)
+			.map(STOCK_ITEM, pricePerProduct.stockItem)
 			.map(PRICE, pricePerProduct.price)
 			.map(START_PRICE, pricePerProduct.startPrice)
-			.map(END_PRICE, pricePerProduct.endPrice)
-			.map(SELL, pricePerProduct.sell);
+			.map(END_PRICE, pricePerProduct.endPrice);
         
         applyPagination(pageable, query, mapping);
         applyOrderById(query);

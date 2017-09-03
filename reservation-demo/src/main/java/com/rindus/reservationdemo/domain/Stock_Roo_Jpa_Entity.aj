@@ -3,7 +3,9 @@
 
 package com.rindus.reservationdemo.domain;
 
+import com.rindus.reservationdemo.domain.PricePerProduct;
 import com.rindus.reservationdemo.domain.Reservation;
+import com.rindus.reservationdemo.domain.Sell;
 import com.rindus.reservationdemo.domain.Stock;
 import io.springlets.format.EntityFormat;
 import javax.persistence.Entity;
@@ -49,6 +51,58 @@ privileged aspect Stock_Roo_Jpa_Entity {
         Assert.notNull(reservasToRemove, ITERABLE_TO_REMOVE_CANT_BE_NULL_MESSAGE);
         for (Reservation item : reservasToRemove) {
             this.reservas.remove(item);
+            item.setStockItem(null);
+        }
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param ventasToAdd
+     */
+    public void Stock.addToVentas(Iterable<Sell> ventasToAdd) {
+        Assert.notNull(ventasToAdd, ITERABLE_TO_ADD_CANT_BE_NULL_MESSAGE);
+        for (Sell item : ventasToAdd) {
+            this.ventas.add(item);
+            item.setStockItem(this);
+        }
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param ventasToRemove
+     */
+    public void Stock.removeFromVentas(Iterable<Sell> ventasToRemove) {
+        Assert.notNull(ventasToRemove, ITERABLE_TO_REMOVE_CANT_BE_NULL_MESSAGE);
+        for (Sell item : ventasToRemove) {
+            this.ventas.remove(item);
+            item.setStockItem(null);
+        }
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param preciosVentaToAdd
+     */
+    public void Stock.addToPreciosVenta(Iterable<PricePerProduct> preciosVentaToAdd) {
+        Assert.notNull(preciosVentaToAdd, ITERABLE_TO_ADD_CANT_BE_NULL_MESSAGE);
+        for (PricePerProduct item : preciosVentaToAdd) {
+            this.preciosVenta.add(item);
+            item.setStockItem(this);
+        }
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param preciosVentaToRemove
+     */
+    public void Stock.removeFromPreciosVenta(Iterable<PricePerProduct> preciosVentaToRemove) {
+        Assert.notNull(preciosVentaToRemove, ITERABLE_TO_REMOVE_CANT_BE_NULL_MESSAGE);
+        for (PricePerProduct item : preciosVentaToRemove) {
+            this.preciosVenta.remove(item);
             item.setStockItem(null);
         }
     }

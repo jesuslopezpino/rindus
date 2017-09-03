@@ -5,6 +5,7 @@ package com.rindus.reservationdemo.service.impl;
 
 import com.rindus.reservationdemo.domain.CustomerOrder;
 import com.rindus.reservationdemo.domain.Sell;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.repository.SellRepository;
 import com.rindus.reservationdemo.service.impl.SellServiceImpl;
 import io.springlets.data.domain.GlobalSearch;
@@ -67,11 +68,10 @@ privileged aspect SellServiceImpl_Roo_Service_Impl {
             sell.getCustomerOrder().getSellList().remove(sell);
         }
         
-        // Clear bidirectional one-to-one parent relationship with PricePerProduct
-        sell.removeFromPriceSell();
-        
-        // Clear bidirectional one-to-one parent relationship with Stock
-        sell.removeFromStockItem();
+        // Clear bidirectional many-to-one child relationship with Stock
+        if (sell.getStockItem() != null) {
+            sell.getStockItem().getVentas().remove(sell);
+        }
         
         getSellRepository().delete(sell);
     }
@@ -106,12 +106,6 @@ privileged aspect SellServiceImpl_Roo_Service_Impl {
      */
     @Transactional
     public Sell SellServiceImpl.save(Sell entity) {
-        
-        // Ensure the relationships are maintained
-        entity.addToPriceSell(entity.getPriceSell());
-        
-        entity.addToStockItem(entity.getStockItem());
-        
         return getSellRepository().save(entity);
     }
     
@@ -201,11 +195,33 @@ privileged aspect SellServiceImpl_Roo_Service_Impl {
     /**
      * TODO Auto-generated method documentation
      * 
+     * @param stockItem
+     * @param globalSearch
+     * @param pageable
+     * @return Page
+     */
+    public Page<Sell> SellServiceImpl.findByStockItem(Stock stockItem, GlobalSearch globalSearch, Pageable pageable) {
+        return getSellRepository().findByStockItem(stockItem, globalSearch, pageable);
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
      * @param customerOrder
      * @return Long
      */
     public long SellServiceImpl.countByCustomerOrder(CustomerOrder customerOrder) {
         return getSellRepository().countByCustomerOrder(customerOrder);
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stockItem
+     * @return Long
+     */
+    public long SellServiceImpl.countByStockItem(Stock stockItem) {
+        return getSellRepository().countByStockItem(stockItem);
     }
     
     /**

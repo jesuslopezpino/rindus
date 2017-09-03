@@ -17,7 +17,6 @@ import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.persistence.OneToOne;
 
 /**
  * = PricePerProduct
@@ -58,6 +57,14 @@ public class PricePerProduct {
      * TODO Auto-generated attribute documentation
      *
      */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @EntityFormat
+    private Stock stockItem;
+
+    /**
+     * TODO Auto-generated attribute documentation
+     *
+     */
     @NotNull
     @Min(0L)
     @NumberFormat
@@ -79,13 +86,4 @@ public class PricePerProduct {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private Date endPrice;
-
-    /**
-     * TODO Auto-generated attribute documentation
-     *
-     */
-    @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
-    @EntityFormat
-    private Sell sell;
 }

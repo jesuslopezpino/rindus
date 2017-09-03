@@ -3,16 +3,14 @@
 
 package com.rindus.reservationdemo.web;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.PropertyGenerator;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.rindus.reservationdemo.domain.CustomerOrder;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.web.CustomerOrderDeserializer;
 import com.rindus.reservationdemo.web.SellJsonMixin;
+import com.rindus.reservationdemo.web.StockDeserializer;
 
 privileged aspect SellJsonMixin_Roo_JSONMixin {
-    
-    declare @type: SellJsonMixin: @JsonIdentityInfo(generator = PropertyGenerator.class, property = "id");
     
     /**
      * TODO Auto-generated attribute documentation
@@ -20,6 +18,13 @@ privileged aspect SellJsonMixin_Roo_JSONMixin {
      */
     @JsonDeserialize(using = CustomerOrderDeserializer.class)
     private CustomerOrder SellJsonMixin.customerOrder;
+    
+    /**
+     * TODO Auto-generated attribute documentation
+     * 
+     */
+    @JsonDeserialize(using = StockDeserializer.class)
+    private Stock SellJsonMixin.stockItem;
     
     /**
      * TODO Auto-generated method documentation
@@ -37,6 +42,24 @@ privileged aspect SellJsonMixin_Roo_JSONMixin {
      */
     public void SellJsonMixin.setCustomerOrder(CustomerOrder customerOrder) {
         this.customerOrder = customerOrder;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @return Stock
+     */
+    public Stock SellJsonMixin.getStockItem() {
+        return stockItem;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stockItem
+     */
+    public void SellJsonMixin.setStockItem(Stock stockItem) {
+        this.stockItem = stockItem;
     }
     
 }

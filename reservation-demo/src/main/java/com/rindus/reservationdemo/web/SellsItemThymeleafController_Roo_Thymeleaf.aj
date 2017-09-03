@@ -187,8 +187,6 @@ privileged aspect SellsItemThymeleafController_Roo_Thymeleaf {
     @InitBinder("sell")
     public void SellsItemThymeleafController.initSellBinder(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
-        dataBinder.setDisallowedFields("priceSell.id");
-        dataBinder.setDisallowedFields("stockItem.id");
     }
     
     /**

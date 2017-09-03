@@ -4,7 +4,6 @@
 package com.rindus.reservationdemo.repository;
 
 import com.rindus.reservationdemo.domain.Product;
-import com.rindus.reservationdemo.domain.Sell;
 import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.repository.StockRepositoryCustom;
 import io.springlets.data.domain.GlobalSearch;
@@ -13,16 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 privileged aspect StockRepositoryCustom_Roo_Jpa_Repository_Custom {
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     * @param sell
-     * @param globalSearch
-     * @param pageable
-     * @return Page
-     */
-    public abstract Page<Stock> StockRepositoryCustom.findBySell(Sell sell, GlobalSearch globalSearch, Pageable pageable);
     
     /**
      * TODO Auto-generated method documentation

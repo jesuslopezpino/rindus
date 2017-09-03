@@ -20,7 +20,6 @@ import java.util.List;
 import javax.persistence.OneToMany;
 import org.springframework.roo.addon.jpa.annotations.entity.JpaRelationType;
 import org.springframework.roo.addon.jpa.annotations.entity.RooJpaRelation;
-import javax.persistence.OneToOne;
 
 /**
  * = Stock
@@ -86,8 +85,15 @@ public class Stock {
      * TODO Auto-generated attribute documentation
      *
      */
-    @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
-    @EntityFormat
-    private Sell sell;
+    @OneToMany(cascade = { javax.persistence.CascadeType.MERGE, javax.persistence.CascadeType.PERSIST }, fetch = FetchType.LAZY, mappedBy = "stockItem")
+    @RooJpaRelation(type = JpaRelationType.AGGREGATION)
+    private List<Sell> ventas = new ArrayList<Sell>();
+
+    /**
+     * TODO Auto-generated attribute documentation
+     *
+     */
+    @OneToMany(cascade = { javax.persistence.CascadeType.MERGE, javax.persistence.CascadeType.PERSIST }, fetch = FetchType.LAZY, mappedBy = "stockItem")
+    @RooJpaRelation(type = JpaRelationType.AGGREGATION)
+    private List<PricePerProduct> preciosVenta = new ArrayList<PricePerProduct>();
 }

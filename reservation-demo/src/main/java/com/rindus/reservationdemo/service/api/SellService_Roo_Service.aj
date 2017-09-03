@@ -5,6 +5,7 @@ package com.rindus.reservationdemo.service.api;
 
 import com.rindus.reservationdemo.domain.CustomerOrder;
 import com.rindus.reservationdemo.domain.Sell;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.service.api.SellService;
 import io.springlets.data.domain.GlobalSearch;
 import io.springlets.format.EntityResolver;
@@ -116,9 +117,27 @@ privileged aspect SellService_Roo_Service {
     /**
      * TODO Auto-generated method documentation
      * 
+     * @param stockItem
+     * @param globalSearch
+     * @param pageable
+     * @return Page
+     */
+    public abstract Page<Sell> SellService.findByStockItem(Stock stockItem, GlobalSearch globalSearch, Pageable pageable);
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
      * @param customerOrder
      * @return Long
      */
     public abstract long SellService.countByCustomerOrder(CustomerOrder customerOrder);
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param stockItem
+     * @return Long
+     */
+    public abstract long SellService.countByStockItem(Stock stockItem);
     
 }

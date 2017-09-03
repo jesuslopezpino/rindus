@@ -3,9 +3,7 @@
 
 package com.rindus.reservationdemo.domain;
 
-import com.rindus.reservationdemo.domain.PricePerProduct;
 import com.rindus.reservationdemo.domain.Sell;
-import com.rindus.reservationdemo.domain.Stock;
 import io.springlets.format.EntityFormat;
 import javax.persistence.Entity;
 
@@ -26,55 +24,5 @@ privileged aspect Sell_Roo_Jpa_Entity {
      * 
      */
     public static final String Sell.ITERABLE_TO_REMOVE_CANT_BE_NULL_MESSAGE = "The given Iterable of items to add can't be null!";
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     * @param stockItem
-     */
-    public void Sell.addToStockItem(Stock stockItem) {
-        if (stockItem == null) {
-            removeFromStockItem();
-        } else {
-            this.stockItem = stockItem;
-            stockItem.setSell(this);
-        }
-    }
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     */
-    public void Sell.removeFromStockItem() {
-        if (this.stockItem != null) {
-            stockItem.setSell(null);
-        }
-        this.stockItem = null;
-    }
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     * @param priceSell
-     */
-    public void Sell.addToPriceSell(PricePerProduct priceSell) {
-        if (priceSell == null) {
-            removeFromPriceSell();
-        } else {
-            this.priceSell = priceSell;
-            priceSell.setSell(this);
-        }
-    }
-    
-    /**
-     * TODO Auto-generated method documentation
-     * 
-     */
-    public void Sell.removeFromPriceSell() {
-        if (this.priceSell != null) {
-            priceSell.setSell(null);
-        }
-        this.priceSell = null;
-    }
     
 }

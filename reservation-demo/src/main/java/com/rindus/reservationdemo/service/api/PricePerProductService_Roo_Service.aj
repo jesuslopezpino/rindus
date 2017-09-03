@@ -5,7 +5,7 @@ package com.rindus.reservationdemo.service.api;
 
 import com.rindus.reservationdemo.domain.PricePerProduct;
 import com.rindus.reservationdemo.domain.Product;
-import com.rindus.reservationdemo.domain.Sell;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.service.api.PricePerProductService;
 import io.springlets.data.domain.GlobalSearch;
 import io.springlets.format.EntityResolver;
@@ -117,12 +117,12 @@ privileged aspect PricePerProductService_Roo_Service {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @param sell
+     * @param stockItem
      * @param globalSearch
      * @param pageable
      * @return Page
      */
-    public abstract Page<PricePerProduct> PricePerProductService.findBySell(Sell sell, GlobalSearch globalSearch, Pageable pageable);
+    public abstract Page<PricePerProduct> PricePerProductService.findByStockItem(Stock stockItem, GlobalSearch globalSearch, Pageable pageable);
     
     /**
      * TODO Auto-generated method documentation
@@ -135,9 +135,9 @@ privileged aspect PricePerProductService_Roo_Service {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @param sell
+     * @param stockItem
      * @return Long
      */
-    public abstract long PricePerProductService.countBySell(Sell sell);
+    public abstract long PricePerProductService.countByStockItem(Stock stockItem);
     
 }

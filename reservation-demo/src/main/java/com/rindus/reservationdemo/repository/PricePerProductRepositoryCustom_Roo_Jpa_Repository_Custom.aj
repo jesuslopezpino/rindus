@@ -5,7 +5,7 @@ package com.rindus.reservationdemo.repository;
 
 import com.rindus.reservationdemo.domain.PricePerProduct;
 import com.rindus.reservationdemo.domain.Product;
-import com.rindus.reservationdemo.domain.Sell;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.repository.PricePerProductRepositoryCustom;
 import io.springlets.data.domain.GlobalSearch;
 import java.util.List;
@@ -17,12 +17,12 @@ privileged aspect PricePerProductRepositoryCustom_Roo_Jpa_Repository_Custom {
     /**
      * TODO Auto-generated method documentation
      * 
-     * @param sell
+     * @param stockItem
      * @param globalSearch
      * @param pageable
      * @return Page
      */
-    public abstract Page<PricePerProduct> PricePerProductRepositoryCustom.findBySell(Sell sell, GlobalSearch globalSearch, Pageable pageable);
+    public abstract Page<PricePerProduct> PricePerProductRepositoryCustom.findByStockItem(Stock stockItem, GlobalSearch globalSearch, Pageable pageable);
     
     /**
      * TODO Auto-generated method documentation
