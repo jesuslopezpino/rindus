@@ -1,4 +1,5 @@
 //project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --java 8 --multimodule STANDARD
+//project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --java 8 --multimodule BASIC
 project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --java 8 --multimodule BASIC
 
 jpa setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT
@@ -14,6 +15,8 @@ entity jpa --class ~.domain.Sell
 focus --class ~.domain.Product
 field string --fieldName name --notNull --unique --sizeMax 250
 field string	 --fieldName description --notNull --sizeMax 4000
+field list --fieldName productosStock --type ~.domain.Stock --cardinality ONE_TO_MANY --mappedBy producto
+field list --fieldName preciosPorProducto --type ~.domain.PricePerProduct --cardinality ONE_TO_MANY --mappedBy producto
 
 focus --class ~.domain.Customer
 field string --fieldName email --notNull --unique 
@@ -22,14 +25,15 @@ field string --fieldName surname1 --notNull --sizeMax 250
 field string --fieldName surname2 --sizeMax 250
 field date --fieldName birthDate --type java.util.Date --notNull --past --dateTimeFormatPattern dd/MM/yyyy
 field list --fieldName pedidos --type ~.domain.CustomerOrder --cardinality ONE_TO_MANY --mappedBy customer
+field list --fieldName reservas --type ~.domain.Reservation --cardinality ONE_TO_MANY --mappedBy customer
 
 focus --class ~.domain.Stock
-field reference --fieldName producto --type ~.domain.Product --notNull
+//field reference --fieldName producto --type ~.domain.Product --notNull
 field date --fieldName dateIn --type java.util.Date --dateTimeFormatPattern dd/MM/yyyy --notNull 
 field date --fieldName dateOut --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
 
 focus --class ~.domain.PricePerProduct
-field reference --fieldName product --type ~.domain.Product --notNull --mappedBy
+//field reference --fieldName product --type ~.domain.Product --notNull
 field number --fieldName price --type java.lang.Long --notNull --min 0
 field date --fieldName startPrice --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss" --notNull
 field date --fieldName endPrice --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
@@ -40,7 +44,7 @@ field date --fieldName orderDate --type java.util.Date --notNull --dateTimeForma
 
 focus --class ~.domain.Reservation
 field reference --fieldName stockItem --type ~.domain.Stock --notNull 
-field reference --fieldName customer --type ~.domain.Customer 
+//field reference --fieldName customer --type ~.domain.Customer 
 field date --fieldName startReservation --type java.util.Date --notNull --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
 field date --fieldName expirationReservation --type java.util.Date --notNull 
 
