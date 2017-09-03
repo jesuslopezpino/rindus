@@ -20,7 +20,7 @@ import io.springlets.web.mvc.util.ControllerMethodLinkBuilderFactory;
 import io.springlets.web.mvc.util.MethodLinkBuilderFactory;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -293,9 +293,9 @@ privileged aspect ProductsItemProductosStockThymeleafController_Roo_Thymeleaf {
             // Obtain the selected books and include them in the author that will be 
             // included in the view
             if (productosStock != null) {
-                product.setProductosStock(new HashSet<Stock>(getStockService().findAll(productosStock)));
+                product.setProductosStock(new ArrayList<Stock>(getStockService().findAll(productosStock)));
             }else{
-                product.setProductosStock(new HashSet<Stock>());
+                product.setProductosStock(new ArrayList<Stock>());
             }
             // Reset the version to prevent update
              product.setVersion(version);

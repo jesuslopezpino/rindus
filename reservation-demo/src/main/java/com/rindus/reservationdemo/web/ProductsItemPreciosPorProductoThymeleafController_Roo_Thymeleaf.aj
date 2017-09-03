@@ -20,7 +20,7 @@ import io.springlets.web.mvc.util.ControllerMethodLinkBuilderFactory;
 import io.springlets.web.mvc.util.MethodLinkBuilderFactory;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -293,9 +293,9 @@ privileged aspect ProductsItemPreciosPorProductoThymeleafController_Roo_Thymelea
             // Obtain the selected books and include them in the author that will be 
             // included in the view
             if (preciosPorProducto != null) {
-                product.setPreciosPorProducto(new HashSet<PricePerProduct>(getPricePerProductService().findAll(preciosPorProducto)));
+                product.setPreciosPorProducto(new ArrayList<PricePerProduct>(getPricePerProductService().findAll(preciosPorProducto)));
             }else{
-                product.setPreciosPorProducto(new HashSet<PricePerProduct>());
+                product.setPreciosPorProducto(new ArrayList<PricePerProduct>());
             }
             // Reset the version to prevent update
              product.setVersion(version);

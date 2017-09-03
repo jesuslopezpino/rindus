@@ -20,7 +20,7 @@ import io.springlets.web.mvc.util.ControllerMethodLinkBuilderFactory;
 import io.springlets.web.mvc.util.MethodLinkBuilderFactory;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -291,9 +291,9 @@ privileged aspect CustomerOrdersItemSellListThymeleafController_Roo_Thymeleaf {
             // Obtain the selected books and include them in the author that will be 
             // included in the view
             if (sellList != null) {
-                customerOrder.setSellList(new HashSet<Sell>(getSellService().findAll(sellList)));
+                customerOrder.setSellList(new ArrayList<Sell>(getSellService().findAll(sellList)));
             }else{
-                customerOrder.setSellList(new HashSet<Sell>());
+                customerOrder.setSellList(new ArrayList<Sell>());
             }
             // Reset the version to prevent update
              customerOrder.setVersion(version);
