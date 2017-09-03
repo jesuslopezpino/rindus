@@ -65,4 +65,5 @@ service --all
 
 web mvc setup
 web mvc controller --all
-//web mvc finder --all
+web mvc finder --all
+web mvc view setup --type THYMELEAF
