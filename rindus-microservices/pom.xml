@@ -10,9 +10,9 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.rindus.microservicesdemo</groupId>
-  <artifactId>reservationdemo</artifactId>
+  <artifactId>ReservationDemoMicroservices</artifactId>
   <version>1.0.0.BUILD-SNAPSHOT</version>
-  <name>ReservationDemo</name>
+  <name>ReservationDemoMicroservices</name>
 
   <packaging>jar</packaging>
 
