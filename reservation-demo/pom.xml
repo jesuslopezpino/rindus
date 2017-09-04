@@ -10,7 +10,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.rindus.reservationdemo</groupId>
-  <artifactId>reservationdemo</artifactId>
+  <artifactId>reservationdemoweb</artifactId>
   <version>1.0.0.BUILD-SNAPSHOT</version>
   <name>ReservationDemo</name>
 
