@@ -8,17 +8,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.roo.addon.layers.service.annotations.RooServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.annotation.ApplicationScope;
 
 import com.rindus.microservicesdemo.domain.Product;
 import com.rindus.microservicesdemo.domain.Stock;
 import com.rindus.microservicesdemo.repository.StockRepository;
 import com.rindus.microservicesdemo.service.api.ReservationService;
 import com.rindus.microservicesdemo.service.api.SellService;
+import com.rindus.microservicesdemo.service.api.StockService;
 import com.rindus.microservicesdemo.service.api.StockServiceExtended;
 
-import io.springlets.data.domain.GlobalSearch;
-
+@RooServiceImpl(service = StockService.class)
 public class StockServiceExtendedImpl extends StockServiceImpl implements StockServiceExtended {
 
 	public StockServiceExtendedImpl(StockRepository arg0, ReservationService arg1, SellService arg2) {
