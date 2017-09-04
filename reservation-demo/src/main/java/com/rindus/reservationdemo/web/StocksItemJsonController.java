@@ -38,43 +38,43 @@ import org.springframework.web.util.UriComponents;
 @RooJSON
 public class StocksItemJsonController {
 
-	@RequestMapping(name = "increase" , method = RequestMethod.GET)
+	@RequestMapping(value = "/increase" , method = RequestMethod.GET)
 	public ModelAndView increase(Model model) {
 		return new ModelAndView("stocks/increase");
 	}
 
-	/**
-     * TODO Auto-generated method documentation
-     * 
-     * @param customerOrder
-     * @param result
-     * @return ResponseEntity
-     */
-	@RequestMapping(name = "increase" , method = RequestMethod.POST)
-    public ResponseEntity<?> increaseStock(@Valid @RequestBody Product product, @RequestParam(name = "numToAdd") Integer numToAdd, BindingResult result) {
-        
-        if (product.getId() != null || product.getVersion() != null) {        
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
-        
-        if (result.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(result);
-        }
-        
-        List<Stock> list = new ArrayList<Stock>();
-        for (int i = 0; i < numToAdd; i++) {
-			Stock stockItem = new Stock();
-			stockItem.setDateIn(new Date());
-			stockItem.setProducto(product);
-			list.add(stockItem);
-		}
-//        CustomerOrder newCustomerOrder = getCustomerOrderService().save(customerOrder);
-        UriComponents showURI = CustomerOrdersItemJsonController.showURI(newCustomerOrder);
-        
-        return ResponseEntity.created(showURI.toUri()).build();
-    }
+//	/**
+//     * TODO Auto-generated method documentation
+//     * 
+//     * @param customerOrder
+//     * @param result
+//     * @return ResponseEntity
+//     */
+//	@RequestMapping(name = "increase" , method = RequestMethod.POST)
+//    public ResponseEntity<?> increaseStock(@Valid @RequestBody Product product, @RequestParam(name = "numToAdd") Integer numToAdd, BindingResult result) {
+//        
+//        if (product.getId() != null || product.getVersion() != null) {        
+//            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+//        }
+//        
+//        if (result.hasErrors()) {
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(result);
+//        }
+//        
+//        List<Stock> list = new ArrayList<Stock>();
+//        for (int i = 0; i < numToAdd; i++) {
+//			Stock stockItem = new Stock();
+//			stockItem.setDateIn(new Date());
+//			stockItem.setProducto(product);
+//			list.add(stockItem);
+//		}
+////        CustomerOrder newCustomerOrder = getCustomerOrderService().save(customerOrder);
+//        UriComponents showURI = CustomerOrdersItemJsonController.showURI(newCustomerOrder);
+//        
+//        return ResponseEntity.created(showURI.toUri()).build();
+//    }
 	
-	@RequestMapping(name = "decrease" , method = RequestMethod.GET)
+	@RequestMapping(value = "/decrease" , method = RequestMethod.GET)
 	public ModelAndView decrease(Model model) {
 		return new ModelAndView("stocks/decrease");
 	}
