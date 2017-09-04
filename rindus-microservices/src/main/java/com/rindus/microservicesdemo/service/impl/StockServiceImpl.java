@@ -37,7 +37,7 @@ public class StockServiceImpl implements StockService {
 		}
 	    
 	    @Transactional
-	    public void decrease(Product product) {
+	    public int decrease(Product product, int num) {
 //			Page<Stock> currentStockProduct = getStockRepositoryCustom().findByProducto(product, null, null);
 			List<Stock> result = new ArrayList<Stock>();
 			int discarted = 0;
@@ -49,6 +49,7 @@ public class StockServiceImpl implements StockService {
 //				}
 //			}
 //			getStockRepository().delete(result);
+			return 1;
 	    }
 
 }

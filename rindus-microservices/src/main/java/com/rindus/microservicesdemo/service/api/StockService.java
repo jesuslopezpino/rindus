@@ -17,5 +17,5 @@ public interface StockService {
 	
 	public List<Stock> increase(Product product, int num);
 
-	public List<Stock> decrease(Product product, int num);
+	public int decrease(Product product, int num);
 }
