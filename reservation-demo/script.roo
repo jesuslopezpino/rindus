@@ -1,6 +1,6 @@
 //project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --java 8 --multimodule STANDARD
 //project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --java 8 --multimodule BASIC
-project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemoWeb --java 8
+project setup --topLevelPackage com.rindus.reservationDemo --projectName rindusMicroservices --java 8
 
 //jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY
 jpa setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT 
