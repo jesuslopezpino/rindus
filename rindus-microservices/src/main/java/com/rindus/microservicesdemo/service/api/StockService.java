@@ -14,8 +14,4 @@ import org.springframework.roo.addon.layers.service.annotations.RooService;
  */
 @RooService(entity = Stock.class)
 public interface StockService {
-	
-	public List<Stock> increase(Product product, int num);
-
-	public int decrease(Product product, int num);
 }
