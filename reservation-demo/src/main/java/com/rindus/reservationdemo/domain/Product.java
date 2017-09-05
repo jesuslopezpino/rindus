@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.NumberFormat;
 import javax.persistence.Column;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
 import org.springframework.roo.addon.jpa.annotations.entity.JpaRelationType;
 import org.springframework.roo.addon.jpa.annotations.entity.RooJpaRelation;
 
@@ -70,6 +73,10 @@ public class Product {
     @Size(max = 4000)
     private String description;
 
+    @Transient
+    @Min(value = 1)
+    private Integer increase;
+    
     /**
      * TODO Auto-generated attribute documentation
      *
@@ -77,4 +84,14 @@ public class Product {
     @OneToMany(cascade = { javax.persistence.CascadeType.MERGE, javax.persistence.CascadeType.PERSIST }, fetch = FetchType.LAZY, mappedBy = "producto")
     @RooJpaRelation(type = JpaRelationType.AGGREGATION)
     private List<Stock> productosStock = new ArrayList<Stock>();
+
+	public Integer getIncrease() {
+		return increase;
+	}
+
+	public void setIncrease(Integer increase) {
+		this.increase = increase;
+	}
+    
+    
 }

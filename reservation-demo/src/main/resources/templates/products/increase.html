@@ -2,8 +2,8 @@
 <html lang="en" data-layout-decorate="~{layouts/default-layout}">
   <head id="head">
 
-    <title data-th-text="#{label_edit_entity(#{label_product})}">
-    Edit Product - Spring Roo application</title>
+    <title data-th-text="#{label_increase_entity(#{label_product})}">
+    Increase Product Stock - Spring Roo application</title>
 
     <!-- DateTimePicker -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.min.css" data-th-href="@{/webjars/datetimepicker/2.5.4/build/jquery.datetimepicker.min.css}" />
@@ -28,10 +28,10 @@
 
         <div class="container-fluid content" data-th-with="collectionLink=${@linkBuilder.of('ProductsCollectionThymeleafController')},itemLink=${@linkBuilder.of('ProductsItemThymeleafController')}">
 
-          <h1 data-th-text="#{label_edit_entity(#{label_product})}">Edit Product</h1>
+          <h1 data-th-text="#{label_increase_entity(#{label_product})}">Increase Product</h1>
 
           <!-- FORM -->
-          <form class="form-horizontal validate" method="POST" data-th-object="${product}" data-th-action="${itemLink.to('editForm').with('product', product.id)}">
+          <form class="form-horizontal validate" method="POST" data-th-object="${product}" data-th-action="${itemLink.to('increaseForm').with('product', product.id)}">
             <input type="hidden" name="_method" value="PUT" />
             	<input type="hidden" name="version" data-th-value="*{version}" />
 
@@ -59,7 +59,7 @@
 <div class="form-group has-error has-feedback" data-z="23b5ad3a" id="product-price-field" data-th-classappend="${#fields.hasErrors('price')}? 'has-error has-feedback'" data-th-class="form-group">
   <label for="price" class="col-md-3 control-label" data-th-text="#{label_product_price}">price</label>
   <div class="col-md-3">
-    <input id="price" name="price" data-th-value="*{{price}}" type="text" class="form-control inputmask" placeholder="price" data-th-placeholder="#{label_product_price}" data-toggle="tooltip" aria-describedby="priceStatus" data-inputmask-alias="numeric" data-inputmask-digits="2" required="required" />
+    <input disabled="disabled" id="price" name="price" data-th-value="*{{price}}" type="text" class="form-control inputmask" placeholder="price" data-th-placeholder="#{label_product_price}" data-toggle="tooltip" aria-describedby="priceStatus" data-inputmask-alias="numeric" data-inputmask-digits="2" required="required" />
       <span data-th-classappend="${#fields.hasErrors('price')}? 'glyphicon glyphicon-remove form-control-feedback'" class="glyphicon glyphicon-remove form-control-feedback" data-th-if="${#fields.hasErrors('price')}" aria-hidden="true"></span>
       <span id="price-error" class="help-block" data-th-if="${#fields.hasErrors('price')}" data-th-errors="*{price}">Error message.</span>
   </div>
@@ -67,7 +67,7 @@
 <div class="form-group has-error has-feedback" data-z="ec27e5a4" id="product-name-field" data-th-classappend="${#fields.hasErrors('name')}? 'has-error has-feedback'" data-th-class="form-group">
   <label for="name" class="col-md-3 control-label" data-th-text="#{label_product_name}">name</label>
   <div class="col-md-6">
-    <input id="name" name="name" data-th-value="*{{name}}" type="text" class="form-control" placeholder="name" data-th-placeholder="#{label_product_name}" data-toggle="tooltip" aria-describedby="nameStatus" required="required" maxlength="250" size="250" />
+    <input disabled="disabled" id="name" name="name" data-th-value="*{{name}}" type="text" class="form-control" placeholder="name" data-th-placeholder="#{label_product_name}" data-toggle="tooltip" aria-describedby="nameStatus" required="required" maxlength="250" size="250" />
       <span data-th-classappend="${#fields.hasErrors('name')}? 'glyphicon glyphicon-remove form-control-feedback'" class="glyphicon glyphicon-remove form-control-feedback" data-th-if="${#fields.hasErrors('name')}" aria-hidden="true"></span>
       <span id="name-error" class="help-block" data-th-if="${#fields.hasErrors('name')}" data-th-errors="*{name}">Error message.</span>
   </div>
@@ -75,9 +75,17 @@
 <div class="form-group has-error has-feedback" data-z="15a07a9a" id="product-description-field" data-th-classappend="${#fields.hasErrors('description')}? 'has-error has-feedback'" data-th-class="form-group">
   <label for="description" class="col-md-3 control-label" data-th-text="#{label_product_description}">description</label>
   <div class="col-md-6">
-    <input id="description" name="description" data-th-value="*{{description}}" type="text" class="form-control" placeholder="description" data-th-placeholder="#{label_product_description}" data-toggle="tooltip" aria-describedby="descriptionStatus" required="required" maxlength="4000" size="4000" />
+    <input disabled="disabled" id="description" name="description" data-th-value="*{{description}}" type="text" class="form-control" placeholder="description" data-th-placeholder="#{label_product_description}" data-toggle="tooltip" aria-describedby="descriptionStatus" required="required" maxlength="4000" size="4000" />
       <span data-th-classappend="${#fields.hasErrors('description')}? 'glyphicon glyphicon-remove form-control-feedback'" class="glyphicon glyphicon-remove form-control-feedback" data-th-if="${#fields.hasErrors('description')}" aria-hidden="true"></span>
       <span id="description-error" class="help-block" data-th-if="${#fields.hasErrors('description')}" data-th-errors="*{description}">Error message.</span>
+  </div>
+</div>
+<div class="form-group has-error has-feedback" id="product-increase-field" data-th-class="form-group">
+  <label for="increase" class="col-md-3 control-label" data-th-text="#{label_product_increase}">increase</label>
+  <div class="col-md-6">
+    <input id="increase" name="increase" type="number" class="form-control" placeholder="increase" data-th-placeholder="#{label_product_increase}" data-toggle="tooltip" aria-describedby="increaseStatus" required="required" min="1" />
+      <span data-th-classappend="${#fields.hasErrors('increase')}? 'glyphicon glyphicon-remove form-control-feedback'" class="glyphicon glyphicon-remove form-control-feedback" data-th-if="${#fields.hasErrors('increase')}" aria-hidden="true"></span>
+      <span id="increase-error" class="help-block" data-th-if="${#fields.hasErrors('increase')}" data-th-errors="*{increase}">Error message.</span>
   </div>
 </div>
              </fieldset>
