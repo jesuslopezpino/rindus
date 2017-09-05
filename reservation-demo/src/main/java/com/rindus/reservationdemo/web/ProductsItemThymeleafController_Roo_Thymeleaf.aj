@@ -232,6 +232,46 @@ privileged aspect ProductsItemThymeleafController_Roo_Thymeleaf {
      * @param model
      * @return ModelAndView
      */
+    @PutMapping(name = "increase", path = "/increase-form")
+    public ModelAndView ProductsItemThymeleafController.increase(@Valid @ModelAttribute Product product, BindingResult result, @RequestParam("version") Integer version, @RequestParam(value = "concurrency", required = false, defaultValue = "") String concurrencyControl, Model model) {
+        	System.out.println("INCREASE");
+    		// Check if provided form contain errors
+        if (result.hasErrors()) {
+            populateForm(model);
+            
+            return new ModelAndView("products/edit");
+        }
+        // Concurrency control
+        Product existingProduct = getProductService().findOne(product.getId());
+        if(product.getVersion() != existingProduct.getVersion() && StringUtils.isEmpty(concurrencyControl)){
+            populateForm(model);
+            model.addAttribute("product", product);
+            model.addAttribute("concurrency", true);
+            return new ModelAndView("products/edit");
+        } else if(product.getVersion() != existingProduct.getVersion() && "discard".equals(concurrencyControl)){
+            populateForm(model);
+            model.addAttribute("product", existingProduct);
+            model.addAttribute("concurrency", false);
+            return new ModelAndView("products/edit");
+        } else if(product.getVersion() != existingProduct.getVersion() && "apply".equals(concurrencyControl)){
+            // Update the version field to be able to override the existing values
+            product.setVersion(existingProduct.getVersion());
+        }
+        Product savedProduct = getProductService().save(product);
+        UriComponents showURI = getItemLink().to(ProductsItemThymeleafLinkFactory.SHOW).with("product", savedProduct.getId()).toUri();
+        return new ModelAndView("redirect:" + showURI.toUriString());
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param product
+     * @param result
+     * @param version
+     * @param concurrencyControl
+     * @param model
+     * @return ModelAndView
+     */
     @PutMapping(name = "update")
     public ModelAndView ProductsItemThymeleafController.update(@Valid @ModelAttribute Product product, BindingResult result, @RequestParam("version") Integer version, @RequestParam(value = "concurrency", required = false, defaultValue = "") String concurrencyControl, Model model) {
         // Check if provided form contain errors
