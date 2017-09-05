@@ -43,6 +43,8 @@ privileged aspect ProductsItemThymeleafLinkFactory_Roo_LinkFactory {
      */
     public static final String ProductsItemThymeleafLinkFactory.UPDATE = "update";
     
+    public static final String ProductsItemThymeleafLinkFactory.INCREASE = "increase";
+    
     /**
      * TODO Auto-generated attribute documentation
      * 
@@ -81,6 +83,9 @@ privileged aspect ProductsItemThymeleafLinkFactory_Roo_LinkFactory {
         }
         if (methodName.equals(UPDATE)) {
             return SpringletsMvcUriComponentsBuilder.fromMethodCall(SpringletsMvcUriComponentsBuilder.on(getControllerClass()).update(null, null, null, null, null)).buildAndExpand(pathVariables);
+        }
+        if (methodName.equals(INCREASE)) {
+            return SpringletsMvcUriComponentsBuilder.fromMethodCall(SpringletsMvcUriComponentsBuilder.on(getControllerClass()).increase(null, null, null, null, null)).buildAndExpand(pathVariables);
         }
         if (methodName.equals(DELETE)) {
             return SpringletsMvcUriComponentsBuilder.fromMethodCall(SpringletsMvcUriComponentsBuilder.on(getControllerClass()).delete(null)).buildAndExpand(pathVariables);
