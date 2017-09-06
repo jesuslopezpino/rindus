@@ -61,6 +61,8 @@ privileged aspect ProductsItemThymeleafController_Roo_Thymeleaf {
      */
     private MethodLinkBuilderFactory<ProductsItemThymeleafController> ProductsItemThymeleafController.itemLink;
     
+    private MethodLinkBuilderFactory<StocksCollectionThymeleafController> ProductsItemThymeleafController.itemLinkStock;
+    
     /**
      * TODO Auto-generated attribute documentation
      * 
@@ -80,6 +82,7 @@ privileged aspect ProductsItemThymeleafController_Roo_Thymeleaf {
 	    	setStockService(stockService);
         setMessageSource(messageSource);
         setItemLink(linkBuilder.of(ProductsItemThymeleafController.class));
+        setItemLinkStock(linkBuilder.of(StocksCollectionThymeleafController.class));
         setCollectionLink(linkBuilder.of(ProductsCollectionThymeleafController.class));
     }
 
@@ -113,10 +116,23 @@ privileged aspect ProductsItemThymeleafController_Roo_Thymeleaf {
     /**
      * TODO Auto-generated method documentation
      * 
+     * @return MethodLinkBuilderFactory
+     */
+    public MethodLinkBuilderFactory<StocksCollectionThymeleafController> ProductsItemThymeleafController.getItemLinkStock() {
+        return itemLinkStock;
+    }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
      * @param itemLink
      */
     public void ProductsItemThymeleafController.setItemLink(MethodLinkBuilderFactory<ProductsItemThymeleafController> itemLink) {
         this.itemLink = itemLink;
+    }
+    
+    public void ProductsItemThymeleafController.setItemLinkStock(MethodLinkBuilderFactory<StocksCollectionThymeleafController> itemLinkStock) {
+        this.itemLinkStock = itemLinkStock;
     }
     
     /**
@@ -273,8 +289,9 @@ privileged aspect ProductsItemThymeleafController_Roo_Thymeleaf {
 			newStockList.add(newItem);
         }
         getStockService().save(newStockList);
-        UriComponents showURI = getItemLink().to(ProductsItemThymeleafLinkFactory.SHOW).with("product", product.getId()).toUri();
-        return new ModelAndView("redirect:" + showURI.toUriString());
+//		UriComponents showURI = getItemLink().to(ProductsItemThymeleafLinkFactory.SHOW).with("product", product.getId()).toUri();
+		UriComponents showURI = getItemLinkStock().to(StocksCollectionThymeleafLinkFactory.LIST).with("product", product.getId()).toUri();
+		return new ModelAndView("redirect:" + showURI.toUriString());
     }
     
     /**
