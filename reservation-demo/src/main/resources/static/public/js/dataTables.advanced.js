@@ -963,6 +963,11 @@
         var url = getDataValue(datatables, 'edit-url');
         return processUrl(datatables, url, id);
     }
+    
+    function getIncreaseUrl(datatables, id) {
+        var url = getDataValue(datatables, 'increase-url');
+        return processUrl(datatables, url, id);
+    }
 
     /**
      * Returns the URL to remove an element of the Datatables.
@@ -1313,6 +1318,12 @@
         	buttons = buttons.concat('<a aria-expanded="false" class="btn btn-action btn-sm" href="#" onclick="event.preventDefault();jQuery(\'#').concat(tableId).concat('\').DataTable().advanced.showInline(this, jQuery(\'#').concat(tableId).concat('\').DataTable(),\'').concat(showUrl).concat('\')" role="button"><span class="glyphicon glyphicon-eye-open"></span></a>');
         }
 
+        var increaseUrl = getIncreaseUrl(datatables, rowId);
+        if (increaseUrl) {
+            buttons = buttons.concat('<a class="btn btn-action btn-sm" href="')
+                .concat(increaseUrl).concat('"><span class="glyphicon glyphicon-pencil"></span></a>');
+        }
+        
         var editUrl = getEditUrl(datatables, rowId);
         if (editUrl) {
             buttons = buttons.concat('<a class="btn btn-action btn-sm" href="')
@@ -1377,6 +1388,7 @@
     apiRegister('advanced.getTableId()', getTableId);
     apiRegister('advanced.getCreateUrl()', getCreateUrl);
     apiRegister('advanced.getEditUrl()', getEditUrl)
+    apiRegister('advanced.getIncreaseUrl()', getIncreaseUrl)
     apiRegister('advanced.getDeleteUrl()', getDeleteUrl);
     apiRegister('advanced.getDeleteBatchUrl()', getDeleteBatchUrl);
     apiRegister('advanced.getShowUrl()', getShowUrl);
