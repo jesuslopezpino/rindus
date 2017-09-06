@@ -77,6 +77,10 @@ public class Product {
     @Min(value = 1)
     private Integer increase;
     
+    @Transient
+    @Min(value = 1)
+    private Integer decrease;
+    
     /**
      * TODO Auto-generated attribute documentation
      *
@@ -92,6 +96,13 @@ public class Product {
 	public void setIncrease(Integer increase) {
 		this.increase = increase;
 	}
-    
+
+	public Integer getDecrease() {
+		return decrease;
+	}
+
+	public void setDecrease(Integer decrease) {
+		this.decrease = decrease;
+	}
     
 }

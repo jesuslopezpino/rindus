@@ -501,6 +501,9 @@ privileged aspect ProductsCollectionThymeleafController_Roo_Thymeleaf {
         else if (columnName.equals("increase")) {
             builder.addColumn(getMessageSource().getMessage("label_product_increase", null, "Increase", locale), "increase", String.class.getName(), 100);
         }
+        else if (columnName.equals("decrease")) {
+            builder.addColumn(getMessageSource().getMessage("label_product_decrease", null, "Decrease", locale), "decrease", String.class.getName(), 100);
+        }
         }
         catch (ColumnBuilderException e) {
             String errorMessage = getMessageSource().getMessage("error_exportingErrorException", 

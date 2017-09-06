@@ -15,6 +15,7 @@ import io.springlets.web.mvc.util.MethodLinkBuilderFactory;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -289,6 +291,42 @@ privileged aspect ProductsItemThymeleafController_Roo_Thymeleaf {
 			newStockList.add(newItem);
         }
         getStockService().save(newStockList);
+//		UriComponents showURI = getItemLink().to(ProductsItemThymeleafLinkFactory.SHOW).with("product", product.getId()).toUri();
+		UriComponents showURI = getItemLinkStock().to(StocksCollectionThymeleafLinkFactory.LIST).with("product", product.getId()).toUri();
+		return new ModelAndView("redirect:" + showURI.toUriString());
+    }
+    
+    @PutMapping(name = "decrease", path = "/decrease-form")
+    public ModelAndView ProductsItemThymeleafController.decrease(@Valid @ModelAttribute Product product, BindingResult result, @RequestParam("version") Integer version, @RequestParam(value = "concurrency", required = false, defaultValue = "") String concurrencyControl, Model model) {
+        	System.out.println("DECREASE: "+product.getDecrease());
+    		// Check if provided form contain errors
+        if (result.hasErrors()) {
+            populateForm(model);
+            
+            return new ModelAndView("products/edit");
+        }
+        // Concurrency control
+        Product existingProduct = getProductService().findOne(product.getId());
+        if(product.getVersion() != existingProduct.getVersion() && StringUtils.isEmpty(concurrencyControl)){
+            populateForm(model);
+            model.addAttribute("product", product);
+            model.addAttribute("concurrency", true);
+            return new ModelAndView("products/edit");
+        } else if(product.getVersion() != existingProduct.getVersion() && "discard".equals(concurrencyControl)){
+            populateForm(model);
+            model.addAttribute("product", existingProduct);
+            model.addAttribute("concurrency", false);
+            return new ModelAndView("products/edit");
+        } else if(product.getVersion() != existingProduct.getVersion() && "apply".equals(concurrencyControl)){
+            // Update the version field to be able to override the existing values
+            product.setVersion(existingProduct.getVersion());
+        }
+        List<Long> deletedStockList = new ArrayList<Long>();
+        List<Stock> currentStock = getStockService().findByProducto(product, null, null).getContent();
+        for (int i = 0; i < product.getDecrease(); i++) {
+			deletedStockList.add(currentStock.get(i).getId());
+        }
+        getStockService().delete(deletedStockList);
 //		UriComponents showURI = getItemLink().to(ProductsItemThymeleafLinkFactory.SHOW).with("product", product.getId()).toUri();
 		UriComponents showURI = getItemLinkStock().to(StocksCollectionThymeleafLinkFactory.LIST).with("product", product.getId()).toUri();
 		return new ModelAndView("redirect:" + showURI.toUriString());

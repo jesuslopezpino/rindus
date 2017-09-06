@@ -32,4 +32,19 @@ public class ProductsItemThymeleafController {
         model.addAttribute("product", product);
         return new ModelAndView("products/increase");
     }
+    
+    /**
+     * TODO Auto-generated method documentation
+     * 
+     * @param product
+     * @param model
+     * @return ModelAndView
+     */
+    @GetMapping(value = "/decrease-form", name = "decreaseForm")
+    public ModelAndView decreaseForm(@ModelAttribute Product product, Model model) {
+        populateForm(model);
+        
+        model.addAttribute("product", product);
+        return new ModelAndView("products/decrease");
+    }
 }

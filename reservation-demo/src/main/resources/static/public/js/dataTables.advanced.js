@@ -969,6 +969,11 @@
         return processUrl(datatables, url, id);
     }
 
+    function getDecreaseUrl(datatables, id) {
+        var url = getDataValue(datatables, 'decrease-url');
+        return processUrl(datatables, url, id);
+    }
+
     /**
      * Returns the URL to remove an element of the Datatables.
      * The value is defined in the Datatables table tag with a
@@ -1324,6 +1329,12 @@
                 .concat(increaseUrl).concat('"><span class="glyphicon glyphicon-pencil"></span></a>');
         }
         
+        var decreaseUrl = getDecreaseUrl(datatables, rowId);
+        if (decreaseUrl) {
+            buttons = buttons.concat('<a class="btn btn-action btn-sm" href="')
+                .concat(decreaseUrl).concat('"><span class="glyphicon glyphicon-pencil"></span></a>');
+        }
+        
         var editUrl = getEditUrl(datatables, rowId);
         if (editUrl) {
             buttons = buttons.concat('<a class="btn btn-action btn-sm" href="')
@@ -1389,6 +1400,7 @@
     apiRegister('advanced.getCreateUrl()', getCreateUrl);
     apiRegister('advanced.getEditUrl()', getEditUrl)
     apiRegister('advanced.getIncreaseUrl()', getIncreaseUrl)
+    apiRegister('advanced.getDecreaseUrl()', getIncreaseUrl)
     apiRegister('advanced.getDeleteUrl()', getDeleteUrl);
     apiRegister('advanced.getDeleteBatchUrl()', getDeleteBatchUrl);
     apiRegister('advanced.getShowUrl()', getShowUrl);

@@ -37,6 +37,8 @@ privileged aspect ProductsItemThymeleafLinkFactory_Roo_LinkFactory {
     
     public static final String ProductsItemThymeleafLinkFactory.INCREASEFORM = "increaseForm";
     
+    public static final String ProductsItemThymeleafLinkFactory.DECREASEFORM = "decreaseForm";
+    
     /**
      * TODO Auto-generated attribute documentation
      * 
@@ -44,6 +46,8 @@ privileged aspect ProductsItemThymeleafLinkFactory_Roo_LinkFactory {
     public static final String ProductsItemThymeleafLinkFactory.UPDATE = "update";
     
     public static final String ProductsItemThymeleafLinkFactory.INCREASE = "increase";
+    
+    public static final String ProductsItemThymeleafLinkFactory.DECREASE = "decrease";
     
     /**
      * TODO Auto-generated attribute documentation
@@ -80,6 +84,9 @@ privileged aspect ProductsItemThymeleafLinkFactory_Roo_LinkFactory {
         }
         if (methodName.equals(INCREASEFORM)) {
             return SpringletsMvcUriComponentsBuilder.fromMethodCall(SpringletsMvcUriComponentsBuilder.on(getControllerClass()).increaseForm(null, null)).buildAndExpand(pathVariables);
+        }
+        if (methodName.equals(DECREASEFORM)) {
+            return SpringletsMvcUriComponentsBuilder.fromMethodCall(SpringletsMvcUriComponentsBuilder.on(getControllerClass()).decreaseForm(null, null)).buildAndExpand(pathVariables);
         }
         if (methodName.equals(UPDATE)) {
             return SpringletsMvcUriComponentsBuilder.fromMethodCall(SpringletsMvcUriComponentsBuilder.on(getControllerClass()).update(null, null, null, null, null)).buildAndExpand(pathVariables);
