@@ -234,7 +234,7 @@ privileged aspect ProductsItemThymeleafController_Roo_Thymeleaf {
      */
     @PutMapping(name = "increase", path = "/increase-form")
     public ModelAndView ProductsItemThymeleafController.increase(@Valid @ModelAttribute Product product, BindingResult result, @RequestParam("version") Integer version, @RequestParam(value = "concurrency", required = false, defaultValue = "") String concurrencyControl, Model model) {
-        	System.out.println("INCREASE");
+        	System.out.println("INCREASE: "+product.getIncrease());
     		// Check if provided form contain errors
         if (result.hasErrors()) {
             populateForm(model);
