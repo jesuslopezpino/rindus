@@ -4,15 +4,22 @@
 package com.rindus.reservationdemo.web;
 
 import com.rindus.reservationdemo.service.api.ProductService;
+import com.rindus.reservationdemo.service.api.StockService;
 import com.rindus.reservationdemo.web.ProductsItemThymeleafController;
 
 privileged aspect ProductsItemThymeleafController_Roo_Controller {
+    
+	/**
+     * TODO Auto-generated attribute documentation
+     * 
+     */
+    private ProductService ProductsItemThymeleafController.productService;
     
     /**
      * TODO Auto-generated attribute documentation
      * 
      */
-    private ProductService ProductsItemThymeleafController.productService;
+    private StockService ProductsItemThymeleafController.stockService;
     
     /**
      * TODO Auto-generated method documentation
@@ -23,6 +30,10 @@ privileged aspect ProductsItemThymeleafController_Roo_Controller {
         return productService;
     }
     
+    public StockService ProductsItemThymeleafController.getStockService() {
+        return stockService;
+    }
+    
     /**
      * TODO Auto-generated method documentation
      * 
@@ -30,6 +41,10 @@ privileged aspect ProductsItemThymeleafController_Roo_Controller {
      */
     public void ProductsItemThymeleafController.setProductService(ProductService productService) {
         this.productService = productService;
+    }
+    
+    public void ProductsItemThymeleafController.setStockService(StockService stockService) {
+        this.stockService = stockService;
     }
     
 }

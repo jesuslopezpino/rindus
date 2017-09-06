@@ -4,6 +4,7 @@
 package com.rindus.reservationdemo.web;
 
 import com.rindus.reservationdemo.domain.Product;
+import com.rindus.reservationdemo.domain.Stock;
 import com.rindus.reservationdemo.service.api.ProductService;
 import com.rindus.reservationdemo.web.ProductsCollectionThymeleafController;
 import com.rindus.reservationdemo.web.ProductsItemThymeleafController;
@@ -11,6 +12,8 @@ import com.rindus.reservationdemo.web.ProductsItemThymeleafLinkFactory;
 import io.springlets.web.NotFoundException;
 import io.springlets.web.mvc.util.ControllerMethodLinkBuilderFactory;
 import io.springlets.web.mvc.util.MethodLinkBuilderFactory;
+
+import java.util.Date;
 import java.util.Locale;
 import javax.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
@@ -35,6 +38,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponents;
+
+import com.rindus.reservationdemo.service.api.StockService;
 
 privileged aspect ProductsItemThymeleafController_Roo_Thymeleaf {
     
@@ -68,8 +73,9 @@ privileged aspect ProductsItemThymeleafController_Roo_Thymeleaf {
      * @param linkBuilder
      */
     @Autowired
-    public ProductsItemThymeleafController.new(ProductService productService, MessageSource messageSource, ControllerMethodLinkBuilderFactory linkBuilder) {
-        setProductService(productService);
+    public ProductsItemThymeleafController.new(ProductService productService, StockService stockService, MessageSource messageSource, ControllerMethodLinkBuilderFactory linkBuilder) {
+	    	setProductService(productService);
+	    	setStockService(stockService);
         setMessageSource(messageSource);
         setItemLink(linkBuilder.of(ProductsItemThymeleafController.class));
         setCollectionLink(linkBuilder.of(ProductsCollectionThymeleafController.class));
@@ -256,6 +262,12 @@ privileged aspect ProductsItemThymeleafController_Roo_Thymeleaf {
         } else if(product.getVersion() != existingProduct.getVersion() && "apply".equals(concurrencyControl)){
             // Update the version field to be able to override the existing values
             product.setVersion(existingProduct.getVersion());
+        }
+        for (int i = 0; i < product.getIncrease(); i++) {
+			Stock newItem = new Stock();
+			newItem.setDateIn(new Date());
+			newItem.setProducto(product);
+			product.getProductosStock().add(newItem);
         }
         Product savedProduct = getProductService().save(product);
         UriComponents showURI = getItemLink().to(ProductsItemThymeleafLinkFactory.SHOW).with("product", savedProduct.getId()).toUri();
