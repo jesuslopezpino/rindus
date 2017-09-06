@@ -1326,13 +1326,13 @@
         var increaseUrl = getIncreaseUrl(datatables, rowId);
         if (increaseUrl) {
             buttons = buttons.concat('<a class="btn btn-action btn-sm" href="')
-                .concat(increaseUrl).concat('"><span class="glyphicon glyphicon-pencil"></span></a>');
+                .concat(increaseUrl).concat('"><span class="glyphicon glyphicon-plus "></span></a>');
         }
         
         var decreaseUrl = getDecreaseUrl(datatables, rowId);
         if (decreaseUrl) {
             buttons = buttons.concat('<a class="btn btn-action btn-sm" href="')
-                .concat(decreaseUrl).concat('"><span class="glyphicon glyphicon-pencil"></span></a>');
+                .concat(decreaseUrl).concat('"><span class="glyphicon glyphicon-minus"></span></a>');
         }
         
         var editUrl = getEditUrl(datatables, rowId);
