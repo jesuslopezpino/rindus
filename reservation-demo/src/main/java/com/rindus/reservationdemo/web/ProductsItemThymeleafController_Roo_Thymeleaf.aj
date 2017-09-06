@@ -13,7 +13,9 @@ import io.springlets.web.NotFoundException;
 import io.springlets.web.mvc.util.ControllerMethodLinkBuilderFactory;
 import io.springlets.web.mvc.util.MethodLinkBuilderFactory;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import javax.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
@@ -263,14 +265,15 @@ privileged aspect ProductsItemThymeleafController_Roo_Thymeleaf {
             // Update the version field to be able to override the existing values
             product.setVersion(existingProduct.getVersion());
         }
+        List<Stock> newStockList = new ArrayList<Stock>();
         for (int i = 0; i < product.getIncrease(); i++) {
 			Stock newItem = new Stock();
 			newItem.setDateIn(new Date());
 			newItem.setProducto(product);
-			product.getProductosStock().add(newItem);
+			newStockList.add(newItem);
         }
-        Product savedProduct = getProductService().save(product);
-        UriComponents showURI = getItemLink().to(ProductsItemThymeleafLinkFactory.SHOW).with("product", savedProduct.getId()).toUri();
+        getStockService().save(newStockList);
+        UriComponents showURI = getItemLink().to(ProductsItemThymeleafLinkFactory.SHOW).with("product", product.getId()).toUri();
         return new ModelAndView("redirect:" + showURI.toUriString());
     }
     
