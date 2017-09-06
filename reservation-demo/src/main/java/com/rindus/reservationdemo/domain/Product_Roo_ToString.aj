@@ -19,6 +19,8 @@ privileged aspect Product_Roo_ToString {
                 ", price='" + price + '\'' + 
                 ", name='" + name + '\'' + 
                 ", description='" + description + '\'' + 
+                ", increase='" + increase + '\'' + 
+                ", decrease='" + decrease + '\'' + 
                 ", ITERABLE_TO_ADD_CANT_BE_NULL_MESSAGE='" + ITERABLE_TO_ADD_CANT_BE_NULL_MESSAGE + '\'' + 
                 ", ITERABLE_TO_REMOVE_CANT_BE_NULL_MESSAGE='" + ITERABLE_TO_REMOVE_CANT_BE_NULL_MESSAGE + '\'' + "}" + super.toString();
     }
